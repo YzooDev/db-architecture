@@ -13,27 +13,29 @@ class Image
     private \DateTime $uploadedAt;
 
     public function __construct(
-        int $projectId = 0,
-        string $filename = '',
-        string $altText = '',
-        bool $isCover = false,
-        int $sortOrder = 0,
-        ?int $id = null
+        int $projectId,
+        string $filename,
+        string $altText,
+        bool $isCover,
+        int $sortOrder
     ) {
-        $this->id         = $id;
-        $this->projectId  = $projectId;
-        $this->filename   = $filename;
-        $this->altText    = $altText;
-        $this->isCover    = $isCover;
-        $this->sortOrder  = $sortOrder;
+        $this->projectId = $projectId;
+        $this->filename = $filename;
+        $this->altText = $altText;
+        $this->isCover = $isCover;
+        $this->sortOrder = $sortOrder;
         $this->uploadedAt = new \DateTime();
     }
 
-    // --- Getters ---
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getProjectId(): int
@@ -41,46 +43,14 @@ class Image
         return $this->projectId;
     }
 
-    public function getFilename(): string
-    {
-        return $this->filename;
-    }
-
-    public function getAltText(): string
-    {
-        return $this->altText;
-    }
-
-    public function isCover(): bool
-    {
-        return $this->isCover;
-    }
-
-    public function getSortOrder(): int
-    {
-        return $this->sortOrder;
-    }
-
-    public function getUploadedAt(): \DateTime
-    {
-        return $this->uploadedAt;
-    }
-
-    public function getPath(): string
-    {
-        return $_ENV['UPLOAD_DIRECTORY'] . $this->filename;
-    }
-
-    // --- Setters ---
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
     public function setProjectId(int $projectId): void
     {
         $this->projectId = $projectId;
+    }
+
+    public function getFilename(): string
+    {
+        return $this->filename;
     }
 
     public function setFilename(string $filename): void
@@ -88,9 +58,19 @@ class Image
         $this->filename = $filename;
     }
 
+    public function getAltText(): string
+    {
+        return $this->altText;
+    }
+
     public function setAltText(string $altText): void
     {
         $this->altText = $altText;
+    }
+
+    public function isCover(): bool
+    {
+        return $this->isCover;
     }
 
     public function setIsCover(bool $isCover): void
@@ -98,13 +78,28 @@ class Image
         $this->isCover = $isCover;
     }
 
+    public function getSortOrder(): int
+    {
+        return $this->sortOrder;
+    }
+
     public function setSortOrder(int $sortOrder): void
     {
         $this->sortOrder = $sortOrder;
     }
 
+    public function getUploadedAt(): \DateTime
+    {
+        return $this->uploadedAt;
+    }
+
     public function setUploadedAt(\DateTime $uploadedAt): void
     {
         $this->uploadedAt = $uploadedAt;
+    }
+
+    public function getPath(): string
+    {
+        return $_ENV['UPLOAD_DIRECTORY'] . $this->filename;
     }
 }

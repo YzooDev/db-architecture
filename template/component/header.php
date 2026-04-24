@@ -18,7 +18,7 @@
                 <?php if(!isset($_SESSION["connected"]) ): ?>
                     <li><a href="/contact">Contact</a></li>
                 <?php else : ?>
-                    <li><a href="/addproject">Ajouter un projet</a>
+                    <li><a href="/project/new">Ajouter un projet</a>
                     <li><a href="/logout">Déconnexion</a></li>
                 <?php endif ?>
             </ul>

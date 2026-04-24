@@ -24,9 +24,9 @@ class SecurityService
         //Supprime le cookie
         unset($_COOKIE["PHPSESSID"]);
         //Redirection vers accueil
-        // header('Location: /');
-        echo "déconnecté";
-        header("Refresh:2; url=/");
+        header('Location: /');
+        // echo "déconnecté";
+        // header("Refresh:2; url=/");
     }
 
     public function login(array $account): string 

@@ -7,25 +7,29 @@ class Project
     private ?int $id;
     private string $name;
     private string $description;
-    private \DateTime $createdAt;
     private string $location;
-    private string $images;
+    private int $year;
+    private \DateTime $createdAt;
+    private string $category;
     private bool $built;
+    private array $images;
 
     public function __construct(
         string $name,
         string $description,
-        \DateTime $createdAt,
         string $location,
-        string $images,
+        int $year,
+        string $category,
         bool $built
     ) {
         $this->name = $name;
         $this->description = $description;
-        $this->createdAt = $createdAt;
         $this->location = $location;
-        $this->images = $images;
+        $this->year = $year;
+        $this->category = $category;
+        $this->createdAt = new \DateTime;
         $this->built = $built;
+        $this->images = [];
     }
 
     public function getId(): ?int 
@@ -72,16 +76,6 @@ class Project
         $this->description = $description;
     }
 
-    public function getCreatedAt(): \DateTime 
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): void 
-    {
-        $this->createdAt = $createdAt;
-    }
-
     public function getLocation(): string 
     {
         return $this->location;
@@ -92,14 +86,34 @@ class Project
         $this->location = $location;
     }
 
-    public function getImages(): string 
+    public function getYear(): int 
     {
-        return $this->images;
+        return $this->year;
     }
 
-    public function setImages(string $images): void 
+    public function setYear(int $year): void 
     {
-        $this->images = $images;
+        $this->year = $year;
+    }
+
+    public function getCreatedAt(): \DateTime 
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): void 
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getCategory(): string 
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): void 
+    {
+        $this->category = $category;
     }
 
     public function getBuilt(): bool 
@@ -110,5 +124,21 @@ class Project
     public function setBuilt(bool $built): void 
     {
         $this->built = $built;
+    }
+
+    public function getImages(): array
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): void
+    {
+        $this->images[] = $image;
+    }
+
+    public function removeImage(Image $image): void
+    {
+        unset($this->images[array_search($image, $this->images)]);
+        sort($this->images);
     }
 }

@@ -50,6 +50,9 @@ switch ($path) {
     case '/test':
         $testController->index();
         break;
+    case '/project/new':
+        $projectController;
+        break;
     default:
         echo "404 la page n'existe pas";
         break;
