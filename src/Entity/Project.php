@@ -28,7 +28,8 @@ class Project
         $this->built = $built;
     }
 
-    public function getId(): ?int {
+    public function getId(): ?int 
+    {
         return $this->id;
     }
 
@@ -39,19 +40,23 @@ class Project
     //     return $this;
     // }
 
-    public function setId(?int $id): void {
+    public function setId(?int $id): void 
+    {
         $this->id = $id;
     }
 
-    public function getName(): string {
+    public function getName(): string 
+    {
         return $this->name;
     }
 
-    public function setName(string $name): void {
+    public function setName(string $name): void 
+    {
         $this->name = $name;
     }
     
-    public function getDescription(): string {
+    public function getDescription(): string 
+    {
         return $this->description;
     }
 
@@ -62,39 +67,48 @@ class Project
     //     return $this;
     // }
 
-    public function setDescription(string $description): void {
+    public function setDescription(string $description): void 
+    {
         $this->description = $description;
     }
 
-    public function getCreatedAt(): \DateTime {
+    public function getCreatedAt(): \DateTime 
+    {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void {
+    public function setCreatedAt(\DateTime $createdAt): void 
+    {
         $this->createdAt = $createdAt;
     }
 
-    public function getLocation(): string {
+    public function getLocation(): string 
+    {
         return $this->location;
     }
 
-    public function setLocation(string $location): void {
+    public function setLocation(string $location): void 
+    {
         $this->location = $location;
     }
 
-    public function getImages(): string {
+    public function getImages(): string 
+    {
         return $this->images;
     }
 
-    public function setImages(string $images): void {
+    public function setImages(string $images): void 
+    {
         $this->images = $images;
     }
 
-    public function getBuilt(): bool {
+    public function getBuilt(): bool 
+    {
         return $this->built;
     }
 
-    public function setBuilt(bool $built): void {
+    public function setBuilt(bool $built): void 
+    {
         $this->built = $built;
     }
 }

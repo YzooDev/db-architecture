@@ -5,17 +5,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/style/main.css">
+    <link rel="stylesheet" href="assets/style/style.css">
     <title><?=  $title ?? "" ?></title>
 </head>
 <body>
     <header>
+        <img src="assets/img/Logo_dBa.webp" alt="logo Daniel Bezes Architecture">
         <nav>
-            <img src="assets/img/Logo_dBa.webp" alt="logo Daniel Bezes Architecture">
             <ul>
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/project">Projets</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <?php if(!isset($_SESSION["connected"]) ): ?>
+                    <li><a href="/contact">Contact</a></li>
+                <?php else : ?>
+                    <li><a href="/addproject">Ajouter un projet</a>
+                    <li><a href="/logout">Déconnexion</a></li>
+                <?php endif ?>
             </ul>
         </nav>
     </header>

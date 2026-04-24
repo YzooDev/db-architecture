@@ -10,17 +10,14 @@ abstract class AbstractController
     }
 
     /**
-     * Méthode pour gérer les accés connecté et role
-     * @param string $role chaine du role à vérifier
+     * Méthode pour gérer les accés connecté
      * @return void
      */
-    protected function isGranted(string $role): void
+    protected function isConnected(): void
     {
-        //Si utilisateur non connecté ou connecté et n'a pas le bon role
+        //Si utilisateur non connecté
         if (
-            !isset($_SESSION["connected"]) || 
-            isset($_SESSION["connected"]) && $_SESSION["right"] != $role
-            ) {
+            !isset($_SESSION["connected"])) {
             header('Location:/');
         }
     }

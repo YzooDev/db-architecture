@@ -17,14 +17,38 @@ $path = isset($url['path']) ? $url['path'] : '/';
 
 //Importer les controllers
 use App\Controller\HomeController;
+use App\Controller\ProjectController;
+use App\Controller\ContactController;
+use App\Controller\SecurityController;
+use App\Controller\TestController;
 
 //instancier les controllers
 $homeController = new HomeController();
+$projectController = new ProjectController();
+$contactController = new ContactController();
+$securityController = new SecurityController();
+$testController = new TestController();
+
 
 //Routeur (test)
 switch ($path) {
     case '/':
         $homeController->index();
+        break;
+    case '/project':
+        $projectController->index();
+        break;
+    case '/contact':
+        $contactController->index();
+        break;
+    case '/admin':
+        $securityController->connection();
+        break;
+    case '/logout':
+        $securityController->disconnection();
+        break;
+    case '/test':
+        $testController->index();
         break;
     default:
         echo "404 la page n'existe pas";
