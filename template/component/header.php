@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -5,21 +7,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="/assets/style/style.css">
     <title><?=  $title ?? "" ?></title>
 </head>
 <body>
     <header>
-        <img src="assets/img/Logo_dBa.webp" alt="logo Daniel Bezes Architecture">
+        <img src="/assets/img/Logo_dBa.webp" alt="logo Daniel Bezes Architecture">
         <nav>
             <ul>
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/project">Projets</a></li>
-                <?php if(!isset($_SESSION["connected"]) ): ?>
-                    <li><a href="/contact">Contact</a></li>
-                <?php else : ?>
-                    <li><a href="/project/new">Ajouter un projet</a>
+                <?php if(isset($_SESSION["connected"])) : ?>
+                    <li><a href="/admin/project">Gérer les projets</a></li>
                     <li><a href="/logout">Déconnexion</a></li>
+                <?php else : ?>
+                    <li><a href="/contact">Contact</a></li>
                 <?php endif ?>
             </ul>
         </nav>

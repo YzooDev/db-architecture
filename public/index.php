@@ -36,7 +36,7 @@ switch ($path) {
         $homeController->index();
         break;
     case '/project':
-        $projectController->index();
+        $projectController->showAllProject();
         break;
     case '/contact':
         $contactController->index();
@@ -47,11 +47,11 @@ switch ($path) {
     case '/logout':
         $securityController->disconnection();
         break;
-    case '/test':
-        $testController->index();
+    case '/admin/project':
+        $projectController->manageProject();
         break;
-    case '/project/new':
-        $projectController;
+    case '/admin/project/new':
+        $projectController->createProject();
         break;
     default:
         echo "404 la page n'existe pas";

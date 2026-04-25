@@ -1,8 +1,4 @@
-<?php
-
-use App\Service\SecurityService;
-
- include 'component/header.php'; ?>
+<?php include __DIR__ . '/component/header.php'; ?>
 <main class="container-fluid">
     <h2>Se connecter</h2>
     <form action="" method="post">
@@ -12,4 +8,4 @@ use App\Service\SecurityService;
     </form>
     <p><?= $data["msg"] ?? "" ?></p>
 </main>
-<?php include 'component/footer.php'; ?>
+<?php include __DIR__ . '/component/footer.php'; ?>
