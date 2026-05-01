@@ -5,25 +5,18 @@ namespace App\Entity;
 class Image
 {
     private ?int $id;
-    private int $projectId;
     private string $filename;
     private string $altText;
     private bool $isCover;
     private int $sortOrder;
     private \DateTime $uploadedAt;
+    private int $projectId;
 
     public function __construct(
-        int $projectId,
-        string $filename,
-        string $altText,
-        bool $isCover,
-        int $sortOrder
+        string $filename = 'image_Logo_dBa.webp'
     ) {
-        $this->projectId = $projectId;
         $this->filename = $filename;
-        $this->altText = $altText;
-        $this->isCover = $isCover;
-        $this->sortOrder = $sortOrder;
+        $this->altText = $filename;
         $this->uploadedAt = new \DateTime();
     }
 
@@ -36,16 +29,6 @@ class Image
     public function setId(int $id): void
     {
         $this->id = $id;
-    }
-
-    public function getProjectId(): int
-    {
-        return $this->projectId;
-    }
-
-    public function setProjectId(int $projectId): void
-    {
-        $this->projectId = $projectId;
     }
 
     public function getFilename(): string
@@ -68,7 +51,7 @@ class Image
         $this->altText = $altText;
     }
 
-    public function isCover(): bool
+    public function GetIsCover(): bool
     {
         return $this->isCover;
     }
@@ -96,6 +79,16 @@ class Image
     public function setUploadedAt(\DateTime $uploadedAt): void
     {
         $this->uploadedAt = $uploadedAt;
+    }
+
+        public function getProjectId(): int
+    {
+        return $this->projectId;
+    }
+
+    public function setProjectId(int $projectId): void
+    {
+        $this->projectId = $projectId;
     }
 
     public function getPath(): string

@@ -4,6 +4,7 @@ Projet de site vitrine pour le stage de fin de formation
 ## 1 Installer les dépendances :
 ```sh
 composer install
+composer require phpmailer/phpmailer
 ```
 ## 2 Créer un fichier .env
 ```env
@@ -22,3 +23,4 @@ php -S 127.0.0.1:8000 -t public
 UPLOAD_DIRECTORY="assets/img/"
 UPLOAD_SIZE_MAX=2097152
 UPLOAD_FORMAT_WHITE_LIST='["png", "jpeg", "jpg", "webp"]'
+

@@ -4,7 +4,11 @@ include __DIR__ . '/component/header.php';
 ?>
 <main>
     <h1>Daniel Bezes Architecture</h1>
-    <h2>Page des Projets</h2>
+    <h2>Page Admin des Projets</h2>
+    <div>
+        <a href="/admin/project/new">+ Nouveau projet</a>
+        <a href="/admin/project/image">+ Ajouter des images</a>
+    </div>
     <?php foreach ($data as $project) : ?>
         <article>
             <p><?= $project->getName() ?></p>

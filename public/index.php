@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 include '../vendor/autoload.php';
 
 //démarrage de la session
@@ -21,6 +23,7 @@ use App\Controller\ProjectController;
 use App\Controller\ContactController;
 use App\Controller\SecurityController;
 use App\Controller\TestController;
+use App\Controller\UploadController;
 
 //instancier les controllers
 $homeController = new HomeController();
@@ -28,6 +31,7 @@ $projectController = new ProjectController();
 $contactController = new ContactController();
 $securityController = new SecurityController();
 $testController = new TestController();
+$uploadController = new UploadController();
 
 
 //Routeur (test)
@@ -39,7 +43,7 @@ switch ($path) {
         $projectController->showAllProject();
         break;
     case '/contact':
-        $contactController->index();
+        $contactController->handle();
         break;
     case '/admin':
         $securityController->connection();
@@ -48,10 +52,13 @@ switch ($path) {
         $securityController->disconnection();
         break;
     case '/admin/project':
-        $projectController->manageProject();
+        $projectController->adminProject();
         break;
     case '/admin/project/new':
         $projectController->createProject();
+        break;
+    case '/admin/project/image':
+        $uploadController->uploadImage();
         break;
     default:
         echo "404 la page n'existe pas";

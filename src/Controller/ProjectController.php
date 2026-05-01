@@ -8,20 +8,40 @@ use App\Service\ProjectService;
 class ProjectController extends AbstractController
 {
     private ProjectService $projectService;
-
-    public function showAllProject(): mixed 
+    
+    public function __construct()
     {
-        return $this->render("project", "Projets");
+        $this->projectService = new ProjectService();
     }
 
-    public function manageProject(): mixed
+    public function showAllProject()
     {
-        return $this->render("manage_project", "Gérer les projets");
+        //Récupération de la liste des ptojets
+        $projects = $this->projectService->getAllProject();
+
+        //rendu du template
+        return $this->render("project", "Projets", $projects);
     }
 
-    public function createProject(): mixed
+    public function createProject()
     {
-        // return $this->render("add_project", "Ajouter un projet", $data);
-        return $this->render("add_project", "Ajouter un projet");
+        if (!isset($_SESSION["connected"])) header('Location:/');
+
+        $data = [];
+
+        if(isset($_POST["submit"])) {
+            $data["msg"] = $this->projectService->insertProject($_POST);
+        }
+
+        return $this->render("add_project","Ajouter un projet", $data);
+    }
+
+    public function adminProject()
+    {
+        if (!isset($_SESSION["connected"])) header('Location:/');
+
+        $projects = $this->projectService->getAllProject();
+
+        return $this->render("admin_project", "Gérer les Projets", $projects);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Image;
+
 class Project
 {
     private ?int $id;
@@ -9,8 +11,8 @@ class Project
     private string $description;
     private string $location;
     private int $year;
-    private \DateTime $createdAt;
     private string $category;
+    private \DateTime $createdAt;
     private bool $built;
     private array $images;
 
@@ -20,7 +22,6 @@ class Project
         string $location,
         int $year,
         string $category,
-        bool $built
     ) {
         $this->name = $name;
         $this->description = $description;
@@ -28,7 +29,7 @@ class Project
         $this->year = $year;
         $this->category = $category;
         $this->createdAt = new \DateTime;
-        $this->built = $built;
+        $this->built = 0;
         $this->images = [];
     }
 
@@ -36,13 +37,6 @@ class Project
     {
         return $this->id;
     }
-
-    // RETURN SELF cf projet_todo
-    // public function setId(?int $id): self
-    // {
-    //     $this->id = $id;
-    //     return $this;
-    // }
 
     public function setId(?int $id): void 
     {
@@ -63,13 +57,6 @@ class Project
     {
         return $this->description;
     }
-
-    // RETURN SELF cf projet_todo
-    // public function setDescription(string $description): self
-    // {
-    //     $this->description = $description;
-    //     return $this;
-    // }
 
     public function setDescription(string $description): void 
     {
@@ -131,12 +118,12 @@ class Project
         return $this->images;
     }
 
-    public function addImage(Image $image): void
+    public function setImage(Image $image): void
     {
         $this->images[] = $image;
     }
 
-    public function removeImage(Image $image): void
+    public function unsetImage(Image $image): void
     {
         unset($this->images[array_search($image, $this->images)]);
         sort($this->images);
