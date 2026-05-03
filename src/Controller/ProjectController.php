@@ -30,7 +30,7 @@ class ProjectController extends AbstractController
         $data = [];
 
         if(isset($_POST["submit"])) {
-            $data["msg"] = $this->projectService->insertProject($_POST);
+            $data["msg"] = $this->projectService->insertProject($_POST, $_FILES);
         }
 
         return $this->render("add_project","Ajouter un projet", $data);

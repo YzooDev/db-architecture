@@ -22,15 +22,13 @@ use App\Controller\HomeController;
 use App\Controller\ProjectController;
 use App\Controller\ContactController;
 use App\Controller\SecurityController;
-use App\Controller\TestController;
 use App\Controller\UploadController;
 
 //instancier les controllers
 $homeController = new HomeController();
 $projectController = new ProjectController();
 $contactController = new ContactController();
-$securityController = new SecurityController();
-$testController = new TestController();
+$securityController = new SecurityController();;
 $uploadController = new UploadController();
 
 

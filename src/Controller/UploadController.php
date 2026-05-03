@@ -23,7 +23,7 @@ class UploadController extends AbstractController
 
         if(isset($_POST["submit"])) {
             if(isset($_FILES["image"])) {
-                $data["msg"] = $this->uploadService->uploadFile($_POST);
+                $data["msg"] = $this->uploadService->uploadFile($_FILES);
             }    
         }
 

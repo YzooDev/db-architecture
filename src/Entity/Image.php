@@ -13,10 +13,16 @@ class Image
     private int $projectId;
 
     public function __construct(
-        string $filename = 'image_Logo_dBa.webp'
+        string $filename = 'image_Logo_dBa.webp',
+        bool $isCover = false,
+        int $sortOrder = 0,
+        int $projectId = 0
     ) {
         $this->filename = $filename;
         $this->altText = $filename;
+        $this->isCover = $isCover;
+        $this->sortOrder = $sortOrder;
+        $this->projectId = $projectId;
         $this->uploadedAt = new \DateTime();
     }
 
@@ -51,7 +57,7 @@ class Image
         $this->altText = $altText;
     }
 
-    public function GetIsCover(): bool
+    public function getIsCover(): bool
     {
         return $this->isCover;
     }

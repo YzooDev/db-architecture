@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Utils\Tools;
 use App\Service\Exception\UploadException;
 use App\Entity\Image;
+use App\Repository\ImageRepository;
 
 class UploadService
 {
@@ -15,6 +16,7 @@ class UploadService
     private readonly int $uploadSizeMax;
     private readonly string $uploadFormatWhiteList;
     private array $uploadFormats;
+    private ImageRepository $imageRepository;
 
     public function __construct()
     {
@@ -23,6 +25,7 @@ class UploadService
         $this->uploadSizeMax = (int) $_ENV["UPLOAD_SIZE_MAX"];
         $this->uploadFormatWhiteList = $_ENV["UPLOAD_FORMAT_WHITE_LIST"];
         $this->uploadFormats = json_decode($this->uploadFormatWhiteList, true) ?? [];
+        $this->imageRepository       = new ImageRepository();
     }
     
     /**
@@ -32,7 +35,7 @@ class UploadService
      * @return string Nom de l'image uploadée
      * @throws UploadException
      */
-    public function uploadFile(array $files): string
+    public function uploadFile(array $files, int $projectId, bool $isCover = false, int $sortOrder = 0): string
     {
         //Test si le fichier est incorrectement uplodé
         if ($this->isFileNotUploadCorrectly($files)) {
@@ -73,8 +76,12 @@ class UploadService
 
         Tools::sanitize_array($files);
 
-        $addImage = $this->mapFromFile($files);
-        return "L'image : " . $addImage->getFilename() . " a été ajouté en BDD";
+        $image = new Image($newName, $isCover, $sortOrder, $projectId);
+        $image->setAltText(pathinfo($files["name"], PATHINFO_FILENAME));
+        $this->imageRepository->addImage($image);
+        return $newName;
+
+        return "L'image :  a été ajouté en BDD";
     }
 
     /**
@@ -122,21 +129,35 @@ class UploadService
         return uniqid("image_") . "." . $ext;
     }
 
-        /**
-     * Méthode pour convertir la super globale FILES (formulaire) en Entity Image
-     * @param array $image Super Globale FILES
-     * @return Image Entity Image
-     */
-    private function mapFromFile(array $image): Image
+    public function uploadMultiple(array $images, int $projectId): array
     {
-        //1 Créer un objet Image
-        $addImage = new Image($image["name"]);
+        $uploadErrors = [];
 
-        //5 Set si la valeur est non vide
-        if(!empty($image["created_at"])) {
-            $addImage->setUploadedAt(new \DateTime($image["uploaded_at"]));
+        foreach (array_keys($images["name"]) as $value) {
+            if ($images["error"][$value] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+
+            $newImage = [
+                "name" => $images["name"][$value],
+                "type" => $images["type"][$value],
+                "tmp_name" => $images["tmp_name"][$value],
+                "error" => $images["error"][$value],
+                "size" => $images["size"][$value]
+            ];
+
+            if ($value === 0) {
+                $isCover = true;
+            } else {
+                $isCover = false;
+            }
+
+            try {
+                $this->uploadFile($newImage, $projectId, $isCover, $value);
+            } catch (UploadException $e) {
+                $uploadErrors[] = '"' . $newImage["name"][$value] . '" : ' . $e->getMessage();
+            }
         }
-
-        return $addImage;
+        return $uploadErrors;
     }
 }

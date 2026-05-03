@@ -35,14 +35,10 @@
                 <input type="checkbox" name="built" value="1" <?= !empty($_POST['built']) ? 'checked' : '' ?>>
             </p>
         </fieldset>
-        <!-- <fieldset>
+        <fieldset>
             <legend>Images du projet</legend>
-            <?php foreach ($data["images"] as $image): ?>
-                <option value="<?= $image->getId() ?>">
-                    <?= $image->getFilename() ?>
-                </option>
-            <?php endforeach ?>
-        </fieldset> -->
+            <input type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png,.webp" multiple required>
+        </fieldset>
         <input type="submit" value="Créer le projet" name="submit">
         <a href="/admin/project">Annuler</a>
     </form>

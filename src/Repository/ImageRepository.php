@@ -41,9 +41,9 @@ class ImageRepository
         $req->bindValue(1, $image->getFilename(), \PDO::PARAM_STR);
         $req->bindValue(2, $image->getAltText(), \PDO::PARAM_STR);
         $req->bindValue(3, $image->getIsCover(), \PDO::PARAM_BOOL);
-        $req->bindValue(1, $image->getSortOrder(), \PDO::PARAM_INT);
-        $req->bindValue(1, $image->getUploadedAt()->format('Y-m-d H:i:s'), \PDO::PARAM_STR);
-        $req->bindValue(1, $image->getProjectId(), \PDO::PARAM_INT);
+        $req->bindValue(4, $image->getSortOrder(), \PDO::PARAM_INT);
+        $req->bindValue(5, $image->getUploadedAt()->format('Y-m-d H:i:s'), \PDO::PARAM_STR);
+        $req->bindValue(6, $image->getProjectId(), \PDO::PARAM_INT);
 
         $req->execute();
 
