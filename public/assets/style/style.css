@@ -543,7 +543,7 @@ main {
   cursor: pointer;
   border: none;
   border-radius: 0;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 .btn--primary {
   background: #1c1c1c;
@@ -643,7 +643,7 @@ main {
   text-align: center;
   cursor: pointer;
   position: relative;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 .upload-zone:hover {
   border-color: #9c9488;
@@ -756,7 +756,7 @@ main {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 .admin-sidebar__nav a:hover, .admin-sidebar__nav a.active {
   color: #fff;
@@ -892,7 +892,7 @@ main {
   border: none;
   background: transparent;
   font-family: "Hind Madurai", system-ui, sans-serif;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   width: 100%;
 }
 .btn-media--cover {

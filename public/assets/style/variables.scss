@@ -1,21 +1,21 @@
-// ── Couleurs ──────────────────────────────────────────────────
-$bg-color     : #f4f1eb;
-$white        : #ffffff;
-$stone        : #e0dbd2;
-$muted        : #9c9488;
-$text-color   : #1c1c1c;
-$anthracite   : #2e2e2e;
-$gold         : #b8965a;
-$danger       : #8b2020;
-$success      : #2a5a35;
+// Couleurs
+$bg-color : #f4f1eb;
+$white : #ffffff;
+$stone : #e0dbd2;
+$muted : #9c9488;
+$text-color : #1c1c1c;
+$anthracite : #2e2e2e;
+$gold : #b8965a;
+$danger : #8b2020;
+$success : #2a5a35;
 
-// ── Typographie ───────────────────────────────────────────────
-$font-sans    : 'Hind Madurai', system-ui, sans-serif;
-$font-serif   : 'Playfair Display', Georgia, serif;
+// Typographie
+$font-sans : 'Hind Madurai', system-ui, sans-serif;
+$font-serif : 'Playfair Display', Georgia, serif;
 
-// ── Espacements ───────────────────────────────────────────────
-$gutter       : clamp(24px, 5vw, 80px);
-$max-w        : 1280px;
+// Espacements
+$gutter : clamp(24px, 5vw, 80px);
+$max-w : 1280px;
 
-// ── Transitions ───────────────────────────────────────────────
-$transition   : 0.3s ease;
+// Transitions
+$transition : 0.3s ease;

@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 
-// ── Reset ─────────────────────────────────────────────────────
+// Reset
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 
@@ -18,7 +18,7 @@ img  { display: block; max-width: 100%; height: auto; }
 a    { color: inherit; text-decoration: none; }
 ul   { list-style: none; }
 
-// ── Utilitaire ────────────────────────────────────────────────
+// Utilitaire 
 .container {
     width: 100%;
     max-width: $max-w;
@@ -26,7 +26,7 @@ ul   { list-style: none; }
     padding-inline: $gutter;
 }
 
-// ── Header / Nav ──────────────────────────────────────────────
+// Header / Nav
 header {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -34,7 +34,7 @@ header {
     gap: 32px;
     padding: 16px $gutter;
     background: $bg-color;
-    border-bottom: 1px solid $stone; // soulignement doré cohérent avec les CTAs
+    border-bottom: 1px solid $stone;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -76,7 +76,7 @@ header {
     }
 }
 
-// ── Footer ────────────────────────────────────────────────────
+// Footer
 footer {
     border-top: 1px solid $stone;
     padding: 40px $gutter;
@@ -93,7 +93,7 @@ footer {
     }
 }
 
-// ── Main / Section ────────────────────────────────────────────
+// Main / Section
 main { padding-inline: $gutter; }
 
 .section {
@@ -142,13 +142,11 @@ main { padding-inline: $gutter; }
     a { border-bottom: 1px solid $stone; }
 }
 
-// ── Présentation Daniel Bezes ─────────────────────────────────
+// Présentation Daniel Bezes
 .presentation {
     display: grid;
-    // Texte flexible + photo qui s'adapte à la hauteur du contenu
     grid-template-columns: 1fr auto;
     gap: 80px;
-    // stretch : les deux colonnes ont la même hauteur (celle du texte)
     align-items: stretch;
     max-width: $max-w;
     margin-inline: auto;
@@ -205,7 +203,6 @@ main { padding-inline: $gutter; }
 
         img {
             width: 100%;
-            // 100% de la hauteur de la div = hauteur du texte (align-items: stretch)
             height: 100%;
             object-fit: cover;
             object-position: top center;
@@ -214,7 +211,7 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Hero ──────────────────────────────────────────────────────
+// Hero
 .hero {
     padding: 100px 0 80px;
     max-width: $max-w;
@@ -261,7 +258,7 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Grille projets ────────────────────────────────────────────
+// Grille projets
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -332,7 +329,7 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Détail projet ─────────────────────────────────────────────
+// Détail projet
 .project-hero {
     &__cover, &__placeholder {
         width: 100%;
@@ -424,7 +421,7 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Alertes ───────────────────────────────────────────────────
+// Alertes
 .alert {
     padding: 14px 20px;
     font-size: 0.85rem;
@@ -443,7 +440,7 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Formulaires ───────────────────────────────────────────────
+// Formulaires
 .form { max-width: 680px; }
 
 .field {
@@ -522,7 +519,7 @@ main { padding-inline: $gutter; }
     border-top: 1px solid $stone;
 }
 
-// ── Boutons ───────────────────────────────────────────────────
+// Boutons
 .btn {
     display: inline-flex;
     align-items: center;
@@ -536,7 +533,7 @@ main { padding-inline: $gutter; }
     cursor: pointer;
     border: none;
     border-radius: 0;
-    transition: background $transition, color $transition;
+    transition: background-color $transition, color $transition;
 
     &--primary { background: $text-color; color: #fff; &:hover { background: $anthracite; } }
     &--ghost   { background: transparent; color: $muted; padding: 12px 0; &:hover { color: $text-color; } }
@@ -551,7 +548,7 @@ main { padding-inline: $gutter; }
     &:hover { color: $text-color; }
 }
 
-// ── Login ─────────────────────────────────────────────────────
+// Login
 .login-page {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -629,14 +626,14 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Upload ────────────────────────────────────────────────────
+// Upload
 .upload-zone {
     border: 1px dashed $stone;
     padding: 48px 32px;
     text-align: center;
     cursor: pointer;
     position: relative;
-    transition: border-color $transition, background $transition;
+    transition: border-color $transition, background-color $transition;
 
     &:hover { border-color: $muted; background: rgba(0,0,0,0.01); }
 
@@ -684,7 +681,7 @@ main { padding-inline: $gutter; }
     color: $muted;
 }
 
-// ── Admin ─────────────────────────────────────────────────────
+// Admin
 .admin-shell {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -732,7 +729,7 @@ main { padding-inline: $gutter; }
             font-size: 0.75rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            transition: color $transition, background $transition;
+            transition: color $transition, background-color $transition;
 
             &:hover, &.active {
                 color: #fff;
@@ -820,7 +817,7 @@ main { padding-inline: $gutter; }
     border: 1px solid $stone;
 }
 
-// ── Gestion des images (page modification) ────────────────────
+// Gestion des images (page modification)
 .media-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -875,7 +872,7 @@ main { padding-inline: $gutter; }
     border: none;
     background: transparent;
     font-family: $font-sans;
-    transition: background $transition, color $transition;
+    transition: background-color $transition, color $transition;
     width: 100%;
 
     &--cover {
@@ -899,7 +896,7 @@ main { padding-inline: $gutter; }
     }
 }
 
-// ── Responsive ────────────────────────────────────────────────
+// Responsive
 @media (max-width: 900px) {
     .presentation {
         grid-template-columns: 1fr;
