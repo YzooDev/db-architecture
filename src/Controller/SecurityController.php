@@ -9,26 +9,34 @@ class SecurityController extends AbstractController
 {
     private SecurityService $securityService;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->securityService = new SecurityService();
     }
 
-    public function connection(): void {
-        $data= [];
-        if (isset($_POST["submit"])) {
-            
-            //Vérification de la connexion
-            $data["msg"] = $this->securityService->login($_POST); 
-
-            //Si on est connecté alors redirection vers l'accueil       
-            if ($data["msg"] == "Vous etes connecté") header("Location:/");
-            //redirection
-            header("Refresh:4;");
+    public function connection(): void
+    {
+        if (!empty($_SESSION["connected"])) {
+            $this->redirect('/admin/project');
         }
-        $this->render("login","Connexion", $data);
+
+        $data = [];
+
+        if (isset($_POST["submit"])) {
+            $data["msg"] = $this->securityService->login($_POST);
+
+            if ($data["msg"] === "Vous etes connecté") {
+                // Prévient la fixation de session (session fixation attack) :
+                // un attaquant ne peut pas réutiliser un ID de session volé avant login.
+                session_regenerate_id(true);
+                $this->redirect('/admin/project');
+            }
+        }
+
+        $this->render("login", "Connexion", $data);
     }
 
-    public function disconnection(): void 
+    public function disconnection(): void
     {
         $this->securityService->logout();
     }

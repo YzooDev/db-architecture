@@ -9,155 +9,188 @@ use App\Repository\ImageRepository;
 
 class UploadService
 {
-    /**
-     * Attributs du service d'upload
-     */
     private readonly string $uploadtarget;
-    private readonly int $uploadSizeMax;
-    private readonly string $uploadFormatWhiteList;
-    private array $uploadFormats;
+    private readonly int    $uploadSizeMax;
+    private array           $uploadFormats;
     private ImageRepository $imageRepository;
 
     public function __construct()
     {
-        //Initialisation des attributs (depuis le fichier .env)
-        $this->uploadtarget = rtrim($_ENV["UPLOAD_DIRECTORY"], "/\\") . DIRECTORY_SEPARATOR;
-        $this->uploadSizeMax = (int) $_ENV["UPLOAD_SIZE_MAX"];
-        $this->uploadFormatWhiteList = $_ENV["UPLOAD_FORMAT_WHITE_LIST"];
-        $this->uploadFormats = json_decode($this->uploadFormatWhiteList, true) ?? [];
-        $this->imageRepository       = new ImageRepository();
+        $this->uploadtarget    = rtrim($_ENV["UPLOAD_DIRECTORY"], "/\\") . DIRECTORY_SEPARATOR;
+        $this->uploadSizeMax   = (int) $_ENV["UPLOAD_SIZE_MAX"];
+        $this->uploadFormats   = json_decode($_ENV["UPLOAD_FORMAT_WHITE_LIST"], true) ?? [];
+        $this->imageRepository = new ImageRepository();
     }
-    
-    /**
-     * Méthode pour uploader un fichier
-     * @param array $files (super globale Files)
-     * @param string $name (nom du fichier)
-     * @return string Nom de l'image uploadée
-     * @throws UploadException
-     */
-    public function uploadFile(array $files, int $projectId, bool $isCover = false, int $sortOrder = 0): string
-    {
-        //Test si le fichier est incorrectement uplodé
-        if ($this->isFileNotUploadCorrectly($files)) {
-            throw new UploadException("Pas de fichier à importer");
-        }
-        if (!isset($files["error"]) || $files["error"] !== UPLOAD_ERR_OK) {
-            throw new UploadException("Erreur lors de l'upload du fichier");
-        }
-        if (!is_uploaded_file($files["tmp_name"])) {
-            throw new UploadException("Fichier uploadé invalide");
-        }
 
-        //test de la taille
-        if ($this->validateUploadSize($files)) {
-            throw new UploadException("La taille du fichier est trop importante");
-        }
-
-        //Récupération de l'extension
-        $ext = Tools::getFileExtension($files["name"]);
-
-        //Test si le format du fichier est valide
-        if (!$this->validateUploadFormat($ext)) {
-            throw new UploadException("Le format " . $ext . " est invalide");
-        }
-        
-        //rename files
-        $newName =  $this->renameFile($ext);
-        $uploadTmp = $files["tmp_name"];
-        $uploadtarget = $this->uploadtarget . $newName;
-
-        //move to Upload_directory
-        if (!is_dir($this->uploadtarget) || !is_writable($this->uploadtarget)) {
-            throw new UploadException("Dossier d'upload introuvable ou non inscriptible");
-        }
-        if (!move_uploaded_file($uploadTmp, $uploadtarget)) {
-            throw new UploadException("Échec lors du déplacement du fichier");
-        }
-
-        Tools::sanitize_array($files);
-
-        $image = new Image($newName, $isCover, $sortOrder, $projectId);
-        $image->setAltText(pathinfo($files["name"], PATHINFO_FILENAME));
-        $this->imageRepository->addImage($image);
-        return $newName;
-
-        return "L'image :  a été ajouté en BDD";
-    }
+    // Méthodes publiques (appelées par ProjectController)
 
     /**
-     * Méthode pour tester si l'image à bien été uploadée
-     * @param array $files (données du fichier)
-     * @return bool Vrai si le fichier a été uploadé incorrectement, faux sinon
+     * Uploade plusieurs images et les rattache à un projet.
+     * Appelée par ProjectController::storeImages().
+     *
+     * @param array $rawFiles   $_FILES['images'] tel que PHP le fournit
+     * @param int   $projectId  ID du projet cible
+     * @param int   $existCount Nombre d'images déjà présentes (détermine la couverture)
+     * @return array            Tableau des messages d'erreur (vide si tout OK)
      */
-    private function isFileNotUploadCorrectly(array $files): bool
+    public function storeImages(array $rawFiles, int $projectId, int $existCount = 0): array
     {
-        return !isset($files["tmp_name"]) || empty($files["tmp_name"]);
-    }
-
-    /**
-     * Méthode pour valider la taille de l'upload
-     * @param array $files (données du fichier)
-     * @return bool Vrai si la taille est trop importante, faux sinon
-     */
-    private function validateUploadSize(array $files): bool
-    {
-        return $files["size"] > $this->uploadSizeMax;
-    }
-
-    /**
-     * Méthode pour valider le format de l'upload
-     * @param string $ext (extension du fichier)
-     * @return bool Vrai si le format est valide, faux sinon
-     */
-    private function validateUploadFormat(string $ext): bool
-    {
-        if (empty($this->uploadFormats)) {
-            return false;
+        if (empty($rawFiles['name'][0])) {
+            return [];
         }
-        return in_array($ext, $this->uploadFormats, true);
-    }
 
-   
-
-    /**
-     * Méthode pour renommer le fichier
-     * @param string $ext (extension du fichier)
-     * @return string Nouveau nom du fichier
-     */
-    private function renameFile(string $ext): string
-    {
-        return uniqid("image_") . "." . $ext;
-    }
-
-    public function uploadMultiple(array $images, int $projectId): array
-    {
         $uploadErrors = [];
 
-        foreach (array_keys($images["name"]) as $value) {
-            if ($images["error"][$value] === UPLOAD_ERR_NO_FILE) {
+        foreach (array_keys($rawFiles['name']) as $i) {
+
+            if ($rawFiles['error'][$i] === UPLOAD_ERR_NO_FILE) {
                 continue;
             }
 
-            $newImage = [
-                "name" => $images["name"][$value],
-                "type" => $images["type"][$value],
-                "tmp_name" => $images["tmp_name"][$value],
-                "error" => $images["error"][$value],
-                "size" => $images["size"][$value]
+            $singleFile = [
+                'name'     => $rawFiles['name'][$i],
+                'type'     => $rawFiles['type'][$i],
+                'tmp_name' => $rawFiles['tmp_name'][$i],
+                'error'    => $rawFiles['error'][$i],
+                'size'     => $rawFiles['size'][$i],
             ];
 
-            if ($value === 0) {
-                $isCover = true;
-            } else {
-                $isCover = false;
-            }
-
             try {
-                $this->uploadFile($newImage, $projectId, $isCover, $value);
+                // Première image du lot = couverture uniquement si le projet
+                // n'en a pas encore ($existCount === 0)
+                $isCover = ($existCount === 0 && $i === 0);
+                $this->uploadFile($singleFile, $projectId, $isCover, $existCount + $i);
+
             } catch (UploadException $e) {
-                $uploadErrors[] = '"' . $newImage["name"][$value] . '" : ' . $e->getMessage();
+                $uploadErrors[] = '"' . $rawFiles['name'][$i] . '" : ' . $e->getMessage();
             }
         }
+
         return $uploadErrors;
+    }
+
+    /**
+     * Définit une image comme couverture du projet.
+     * Appelée par ProjectController::assignCoverImage().
+     *
+     * Logique en deux temps obligatoires :
+     * 1. Retirer is_cover sur TOUTES les images du projet
+     * 2. Poser is_cover sur l'image choisie
+     */
+    public function defineCoverImage(int $imageId, int $projectId): void
+    {
+        $this->imageRepository->clearCoverByProject($projectId);
+        $this->imageRepository->setCoverImage($imageId);
+    }
+
+    /**
+     * Supprime une image : fichier physique + entrée BDD.
+     * Appelée par ProjectController::removeImage().
+     *
+     * Si c'était la couverture, la première image restante prend le relais
+     * automatiquement via promoteFirstImageAsCover().
+     */
+    public function deleteImageFile(int $imageId, int $projectId): void
+    {
+        $image = $this->imageRepository->findImageById($imageId);
+
+        if ($image === null) {
+            return;
+        }
+
+        // Suppression du fichier physique.
+        // On utilise UPLOAD_DIRECTORY du .env — même source que lors de l'upload,
+        // ce qui garantit que le chemin est toujours cohérent.
+        $this->removePhysicalFile($image->getFilename());
+
+        // Suppression de l'entrée en BDD
+        $this->imageRepository->destroyImage($imageId);
+
+        // Si c'était la couverture, promouvoir la première image restante
+        if ($image->getIsCover()) {
+            $this->imageRepository->promoteFirstImageAsCover($projectId);
+        }
+    }
+
+    /**
+     * Supprime toutes les images physiques d'un projet.
+     * Appelée par ProjectService::deleteProject() AVANT la suppression BDD,
+     * car le CASCADE supprime les entrées mais pas les fichiers sur le disque.
+     *
+     * @param array $images Tableau d'objets Image
+     */
+    public function deleteAllProjectFiles(array $images): void
+    {
+        foreach ($images as $image) {
+            $this->removePhysicalFile($image->getFilename());
+        }
+    }
+
+    // Méthodes privées
+
+    /**
+     * Uploade un fichier unique, valide et insère en BDD.
+     */
+    private function uploadFile(
+        array $file,
+        int   $projectId,
+        bool  $isCover   = false,
+        int   $sortOrder = 0
+    ): string {
+        if (!isset($file["tmp_name"]) || empty($file["tmp_name"])) {
+            throw new UploadException("Pas de fichier à importer");
+        }
+        if ($file["error"] !== UPLOAD_ERR_OK) {
+            throw new UploadException("Erreur upload : code " . $file["error"]);
+        }
+        if (!is_uploaded_file($file["tmp_name"])) {
+            throw new UploadException("Fichier uploadé invalide");
+        }
+        if ($file["size"] > $this->uploadSizeMax) {
+            throw new UploadException("Fichier trop lourd (max " . ($this->uploadSizeMax / 1048576) . " Mo)");
+        }
+
+        $ext = Tools::getFileExtension($file["name"]);
+        if (empty($this->uploadFormats) || !in_array($ext, $this->uploadFormats, true)) {
+            throw new UploadException("Format non autorisé : " . $ext);
+        }
+
+        $newName = $this->buildFilename($ext);
+        $uploadTarget = $this->uploadtarget . $newName;
+
+        if (!is_dir($this->uploadtarget) || !is_writable($this->uploadtarget)) {
+            throw new UploadException("Dossier d'upload inaccessible : " . $this->uploadtarget);
+        }
+        if (!move_uploaded_file($file["tmp_name"], $uploadTarget)) {
+            throw new UploadException("Échec du déplacement du fichier");
+        }
+
+        $image = new Image($newName, $isCover, $sortOrder, $projectId);
+        $image->setAltText(pathinfo($file["name"], PATHINFO_FILENAME));
+        $this->imageRepository->saveImage($image);
+
+        return $newName;
+    }
+
+    /**
+     * Supprime un fichier physique depuis le dossier d'upload.
+     * Silencieux si le fichier est introuvable (pas d'exception).
+     */
+    private function removePhysicalFile(string $filename): void
+    {
+        $filePath = $this->uploadtarget . $filename;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
+
+    /**
+     * Génère un nom de fichier unique et non devinable.
+     * uniqid() seul peut produire des collisions en boucle rapide —
+     * random_bytes(8) garantit l'unicité même pour de nombreux fichiers simultanés.
+     */
+    private function buildFilename(string $ext): string
+    {
+        return uniqid("img_") . "_" . bin2hex(random_bytes(8)) . "." . $ext;
     }
 }

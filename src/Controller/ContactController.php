@@ -21,9 +21,9 @@ class ContactController extends AbstractController
 
         if (isset($_POST["submit"])) {
             $formData = [
-                'firstname'    => trim($_POST['firstname'] ?? ''),
-                'lastname'    => trim($_POST['lastname'] ?? ''),
-                'email'   => trim($_POST['email'] ?? ''),
+                'firstname' => trim($_POST['firstname'] ?? ''),
+                'lastname' => trim($_POST['lastname'] ?? ''),
+                'email' => trim($_POST['email'] ?? ''),
                 'description' => trim($_POST['description'] ?? ''),
             ];
 

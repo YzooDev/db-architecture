@@ -1,9 +1,43 @@
-<?php include __DIR__ . '/component/header.php'; ?>
+<?php
+/** @var string $title */
+include __DIR__ . '/component/header.php';
+?>
 <main>
-    <h1>Daniel Bezes Architecture</h1>
-    <h2>Page d'Accueil</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, natus magnam. Ut recusandae nulla ipsam placeat vel eius ipsum tenetur. In, amet aspernatur incidunt ullam blanditiis soluta fugiat veritatis voluptatibus dolore quis! Reprehenderit blanditiis, vero officiis soluta veritatis ut molestiae qui voluptates, dolor nulla placeat dolores velit reiciendis repudiandae! Inventore consequuntur corporis blanditiis. Architecto dolor libero, asperiores similique mollitia consectetur. Nihil sit eveniet porro, numquam quisquam perferendis nisi ab quos molestiae? Doloribus dicta voluptates, magnam vel possimus dolore ea accusamus rerum inventore ad dignissimos, ullam est deserunt qui a consectetur praesentium eos. Reiciendis iste exercitationem, sint incidunt culpa necessitatibus in veniam dolorem quae velit fugit totam illum praesentium. Totam quos dolore quidem nemo sed error, minus dicta voluptates, sit animi iure repellat! Optio provident dolorem quisquam, labore quidem facilis earum et tempore ut, quam ea perspiciatis mollitia rem laudantium minima iure assumenda, ex magni! Culpa ad tempore minus ipsam quia repudiandae est excepturi qui soluta officia doloremque, autem deleniti reprehenderit quibusdam porro quasi vel ex maxime cumque officiis quod provident error. Dignissimos, totam! Soluta omnis voluptas asperiores unde deleniti sit culpa, id vel harum iusto tempora fugit dignissimos totam a sequi sed animi praesentium quod at repellendus nam porro? Culpa cum reprehenderit error qui, eligendi quaerat similique veritatis. Optio magnam amet impedit aut dicta libero quidem officiis nam eius aperiam mollitia obcaecati, sed quod ut asperiores cumque, facilis similique, minima perspiciatis voluptatum et fugit. Veritatis earum voluptas itaque deleniti rerum dolore, minima minus vitae ad sint ipsum distinctio laborum quas praesentium perferendis fugit beatae. Odio cumque sequi sed eaque aut velit suscipit soluta consectetur id nobis amet, beatae labore iure error dolore doloribus? Excepturi dolorem nostrum eos saepe corrupti natus, minus eveniet deleniti porro perferendis, adipisci expedita accusamus officia ex aspernatur totam dolores officiis repellendus dolor? Tempora hic sequi reiciendis dignissimos a officiis in iure! Incidunt ad ullam eveniet ab voluptates iste quas nemo cum saepe voluptatem nobis consequatur, necessitatibus, molestiae consequuntur? Nostrum itaque ab consectetur reiciendis delectus consequuntur minima provident, qui vitae soluta quod facilis aliquid, eveniet omnis laborum quidem optio ullam quos neque cumque ratione quibusdam at. Aspernatur ipsa voluptatum aliquid, unde sed itaque inventore ipsam molestias quis laboriosam quod accusamus magnam soluta ipsum. Vel aut alias dolore eum exercitationem inventore ad nulla, cum nostrum incidunt odit animi, deserunt consequuntur rerum at quos adipisci consectetur optio vitae eaque, expedita voluptatibus autem sint. Sint, dolor? Quia alias cumque enim deleniti quidem architecto beatae error ipsam qui earum numquam odit sint id, consequatur deserunt ipsum, eveniet odio harum, ab natus assumenda explicabo modi labore. Nesciunt debitis beatae distinctio. Eaque sequi ullam asperiores porro assumenda vel ut nisi. Illo, ullam assumenda magni eum consequuntur aspernatur odit in enim modi ratione dolorum repellat neque reprehenderit dicta qui doloribus quam, recusandae suscipit vitae, a repellendus officiis. Distinctio maiores explicabo saepe eos quam, sit quaerat nam quidem corrupti nulla magni in rerum obcaecati numquam fugiat minima laborum ipsam inventore temporibus? Provident consequatur reiciendis libero in explicabo animi ipsam fugit non nihil voluptatum! Dolorem eum eius veritatis architecto, amet voluptatem voluptates aperiam veniam, quis omnis corporis ducimus, pariatur suscipit rerum? Ipsam harum soluta est numquam perferendis inventore voluptatibus possimus ea earum molestias facilis aliquid omnis qui, asperiores illum laboriosam tempore, mollitia deleniti, modi debitis hic! Facilis, debitis. Facilis hic, architecto reprehenderit cumque libero culpa voluptates ad aut! Alias nihil dicta, itaque ullam magnam perferendis tenetur culpa enim maxime fuga quis, temporibus modi. Unde, nulla qui fuga sunt modi tempore ducimus, ab eum quia nisi ipsam quidem debitis minus possimus nobis, recusandae ipsum assumenda repellendus beatae. Ratione natus nam repellendus quam consequuntur fuga autem recusandae blanditiis voluptatem error id, expedita velit laudantium eveniet perspiciatis. Repellat assumenda modi doloribus quam officiis quibusdam excepturi, sequi voluptatem illo? Porro esse fuga explicabo nesciunt obcaecati quo aperiam molestias tempore expedita veritatis! Aspernatur repudiandae voluptatibus beatae ipsam repellat, earum dolore nulla ducimus esse amet natus facilis minus vero quidem harum eligendi quia accusamus quaerat pariatur illum corrupti. Architecto, veniam id. Accusantium, numquam excepturi. Porro, repudiandae optio ad ducimus nemo, ea aut eaque a quasi illo veritatis sapiente eum. Explicabo consequuntur repudiandae porro ut laborum sequi deserunt eum fugit corrupti, numquam fugiat voluptates atque molestiae placeat, rerum in ad veniam. In veniam deserunt eaque fugit voluptatibus. Adipisci itaque, magni asperiores veritatis vel possimus eius impedit harum, mollitia fuga aperiam. Amet qui alias nesciunt enim aperiam doloribus, animi esse ducimus earum molestias aliquam culpa exercitationem neque rem soluta dicta quo! Provident molestias quam vel quasi perferendis quis dignissimos a. Voluptates molestias hic provident cum! Laborum ex laboriosam eius sunt quam sint eum ullam omnis! Ab rem quibusdam deleniti repudiandae exercitationem accusantium commodi modi velit consequatur doloremque reprehenderit itaque voluptas nam, distinctio dolore sequi nisi facere, architecto non dolorem esse rerum! Quo quos minima ab. Possimus sequi dolore enim rerum ut dolor qui maxime fugit, ducimus assumenda. Dignissimos odit sunt ipsam eum aut, voluptate obcaecati numquam? Perferendis, alias sint. Tempore amet voluptatum eos excepturi ut voluptatibus ipsam minus! Officiis obcaecati, natus earum id adipisci dolor architecto vitae nulla a dolorum consequuntur, ipsam, molestias incidunt ducimus maiores aliquam ad corporis eveniet est officia! Libero itaque in vel, error exercitationem non officia. Consequuntur, libero magni. Aperiam similique quos eligendi assumenda voluptates fugiat accusantium! Ex, amet, quis eaque suscipit repellat ea dolores obcaecati odit animi dignissimos aspernatur maxime non voluptatum? Cum alias adipisci veniam beatae numquam laboriosam consectetur, pariatur, doloribus, vero incidunt distinctio accusantium vel aspernatur unde optio ad ipsam consequatur magnam odit ducimus iste dolores. Ratione praesentium repellendus voluptatum animi incidunt eum accusantium aperiam facilis voluptas, eius rem perspiciatis nam exercitationem earum explicabo possimus labore suscipit eveniet fuga id. Delectus illum, iusto dolores eum enim aliquid, nobis accusamus reprehenderit, omnis distinctio quam reiciendis. Quo temporibus labore saepe commodi soluta tenetur animi dolorum! Eaque molestias aliquid velit facilis distinctio facere? Reprehenderit, sunt iure soluta odio dolor dolore unde ex fugiat eius voluptatibus itaque, autem vero. Provident, consectetur corporis quod nemo animi repellendus laboriosam itaque laborum laudantium expedita inventore ratione dicta reprehenderit consequuntur accusamus delectus at, velit officia!</p>
+
+    <!-- Section hero -->
+    <section class="hero" style="padding-inline: clamp(24px, 5vw, 80px); max-width: 1280px; margin-inline: auto;">
+        <p class="hero__eyebrow">Architecture &amp; Conception</p>
+        <h1 class="hero__title">Concevoir des espaces<br><em>qui durent</em></h1>
+        <p class="hero__desc">Cabinet d'architecture basé dans le Tarn (Peyrole), spécialisé dans les projets résidentiels, commerciaux et institutionnels.</p>
+        <a href="/project" class="hero__cta">Découvrir les projets →</a>
+    </section>
+
+    <!-- MODIFICATION 2 : section présentation Daniel Bezes avec portrait -->
+    <section style="padding-inline: clamp(24px, 5vw, 80px);">
+        <article class="presentation">
+            <div class="presentation__content">
+                <h2 class="presentation__name">Daniel BEZES</h2>
+                <p class="presentation__role">Architecte DPLG indépendant</p>
+                <p class="presentation__desc">
+                    Fort de plus de 35 ans de métier, j'accompagne chaque projet avec passion,
+                    en alliant esthétique, fonctionnalité et respect des contraintes techniques.
+                    Spécialisé dans les projets résidentiels, commerciaux et institutionnels,
+                    je mets ma rigueur et ma créativité au service de vos ambitions.
+                </p>
+                <h3 class="presentation__subtitle">Mon objectif</h3>
+                <p class="presentation__desc">
+                    Concevoir des espaces uniques, adaptés à vos attentes et à votre mode de vie.
+                </p>
+                <a href="/contact" class="hero__cta" style="margin-top: 24px;">Prendre contact →</a>
+            </div>
+            <div class="presentation__portrait">
+                <img
+                    src="/assets/img/portrait_Daniel_Bezes.webp"
+                    alt="Daniel Bezes, architecte DPLG"
+                >
+            </div>
+        </article>
+    </section>
+
 </main>
 <?php include __DIR__ . '/component/footer.php'; ?>
-
-    

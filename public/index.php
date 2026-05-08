@@ -4,61 +4,100 @@ declare(strict_types=1);
 
 include '../vendor/autoload.php';
 
-//démarrage de la session
 session_start();
 
-//Charger les variables d'environnement
 $dotenv = Dotenv\Dotenv::createImmutable("../");
 $dotenv->load();
 
-//Récupération de l'URL
-$url = parse_url($_SERVER['REQUEST_URI']);
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-//test soit l'url a une route sinon on renvoi à la racine
-$path = isset($url['path']) ? $url['path'] : '/';
-
-//Importer les controllers
 use App\Controller\HomeController;
 use App\Controller\ProjectController;
 use App\Controller\ContactController;
 use App\Controller\SecurityController;
 use App\Controller\UploadController;
 
-//instancier les controllers
-$homeController = new HomeController();
-$projectController = new ProjectController();
-$contactController = new ContactController();
-$securityController = new SecurityController();;
-$uploadController = new UploadController();
+switch (true) {
 
+    // Pages publiques 
 
-//Routeur (test)
-switch ($path) {
-    case '/':
-        $homeController->index();
+    case $path === '/':
+        (new HomeController())->index();
         break;
-    case '/project':
-        $projectController->showAllProject();
+
+    case $path === '/project':
+        (new ProjectController())->showAllProject();
         break;
-    case '/contact':
-        $contactController->handle();
+
+    case (bool) preg_match('#^/project/(\d+)$#', $path, $data):
+        (new ProjectController())->showProject((int) $data[1]);
         break;
-    case '/admin':
-        $securityController->connection();
+
+    case $path === '/contact':
+        (new ContactController())->handle();
         break;
-    case '/logout':
-        $securityController->disconnection();
+
+    // Authentification
+
+    case $path === '/admin':
+        (new SecurityController())->connection();
         break;
-    case '/admin/project':
-        $projectController->adminProject();
+
+    case $path === '/admin' && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new SecurityController())->connection();
         break;
-    case '/admin/project/new':
-        $projectController->createProject();
+
+    case $path === '/logout':
+        (new SecurityController())->disconnection();
         break;
-    case '/admin/project/image':
-        $uploadController->uploadImage();
+
+    // Admin projets 
+
+    case $path === '/admin/project':
+        (new ProjectController())->listProjects();
         break;
+
+    case $path === '/admin/project/new':
+        (new ProjectController())->createProject();
+        break;
+
+    case $path === '/admin/project/new' && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new ProjectController())->createProject();
+        break;
+
+    case (bool) preg_match('#^/admin/project/(\d+)$#', $path, $data):
+        (new ProjectController())->showAdminProject((int) $data[1]);
+        break;
+
+    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data):
+        (new ProjectController())->editProject((int) $data[1]);
+        break;
+
+    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new ProjectController())->updateProject((int) $data[1]);
+        break;
+
+    case (bool) preg_match('#^/admin/project/(\d+)/delete$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new ProjectController())->removeProject((int) $data[1]);
+        break;
+
+    // Admin gestion images d'un projet
+
+    case (bool) preg_match('#^/admin/project/(\d+)/image/store$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new ProjectController())->storeImages((int) $data[1]);
+        break;
+
+    case (bool) preg_match('#^/admin/project/(\d+)/image/(\d+)/cover$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new ProjectController())->assignCoverImage((int) $data[1], (int) $data[2]);
+        break;
+
+    case (bool) preg_match('#^/admin/project/(\d+)/image/(\d+)/delete$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+        (new ProjectController())->removeImage((int) $data[1], (int) $data[2]);
+        break;
+
     default:
-        echo "404 la page n'existe pas";
+        http_response_code(404);
+        $title = 'Page introuvable';
+        include __DIR__ . '/../template/template_404.php';
         break;
 }

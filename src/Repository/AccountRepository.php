@@ -14,24 +14,6 @@ class AccountRepository
         $this->connect = Mysql::connectBdd();
     }
 
-    // public function isAccountExistsByUsername(string $username): bool 
-    // {
-    //     try  {
-    //         //1 Ecrire la requête SQL
-    //         $sql = "SELECT a.id_account FROM `account` AS a WHERE a.username = ?";
-    //         //2 Préparer la requête,
-    //         $req = $this->connect->prepare($sql);
-    //         //3 Assigner le paramètre,
-    //         $req->bindParam(1, $username, \PDO::PARAM_STR);
-    //         //4 Exécuter la requête,
-    //         $req->execute();
-    //         //5 Fetch en FETCH assoc,
-    //         $account = $req->fetch(\PDO::FETCH_ASSOC);
-    //         //6 retourner true si tableau est non vide, sinon false,
-    //         if (!empty($account)) return true;
-    //     } catch(\PDOException $e) {}
-    //     return false;
-    // }
 
     public function findAccountByUsername(string $username): ?Account
     {

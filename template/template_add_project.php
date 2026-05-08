@@ -1,51 +1,101 @@
 <?php include __DIR__ . '/component/header.php'; ?>
-<main>
-    <h1>Daniel Bezes Architecture</h1>
-    <h2>Page d'ajout de projet</h2>
-    <a href="/admin/image">+ Ajouter des images</a>
-    <form action="" method="post" enctype="multipart/form-data">
-        <fieldset>
-            <legend>Informations générales</legend>
-            <p>
-                <label for="name">Nom du projet</label>
-                <input type="text" name="name" placeholder="Ex : Résidence Thales" aria-label="Nom du projet" required>
-            </p>
-            <p>
-                <label for="description">Description</label>
-                <textarea name="description" cols="25" rows="10" placeholder="Description" required></textarea>
-            </p>
-            <p>
-                <label for="location">Localisation</label>
-                <input type="text" name="location" placeholder="Localisation" aria-label="Localisation" required>
-            </p>
-            <p>
-                <label for="year">Année</label>
-                <input type="number" name="year" placeholder="Année" aria-label="Année" required>
-            </p>
-            <p>
-                <label for="category">Catégorie</label>
-                <select name="category" required>
-                    <option value="1" selected>Collectif</option>
-                    <option value="2">Individuel</option>
-                    <option value="3">Marché public</option>
-                </select>
-            </p>
-            <p>
-                <label for="built">Projet réalisé (construit)</label>
-                <input type="checkbox" name="built" value="1" <?= !empty($_POST['built']) ? 'checked' : '' ?>>
-            </p>
-        </fieldset>
-        <fieldset>
-            <legend>Images du projet</legend>
-            <input type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png,.webp" multiple required>
-        </fieldset>
-        <input type="submit" value="Créer le projet" name="submit">
-        <a href="/admin/project">Annuler</a>
-    </form>
-    <?php if(isset($data["msg"])) : ?>
-    <p><?= $data["msg"] ?></p>
-    <?php endif ?>
-</main>
-<?php include __DIR__ . '/component/footer.php'; ?>
+<div class="admin-shell">
+    <aside class="admin-sidebar">
+        <div class="admin-sidebar__brand">Daniel Bezes <span>Administration</span></div>
+        <nav class="admin-sidebar__nav">
+            <a href="/admin/project" class="active">Projets</a>
+            <a href="/" target="_blank">Voir le site</a>
+            <a href="/logout">Déconnexion</a>
+        </nav>
+    </aside>
+    <main class="admin-main">
+        <div class="admin-page-header">
+            <h1>Nouveau projet</h1>
+            <a href="/admin/project" class="btn btn--ghost">← Retour</a>
+        </div>
 
-    
+        <?php if (!empty($data['msg'])) : ?>
+            <p class="alert alert--<?= str_contains($data['msg'], 'erreur') || str_contains($data['msg'], 'Veuillez') ? 'error' : 'success' ?>">
+                <?= htmlspecialchars($data['msg']) ?>
+            </p>
+        <?php endif; ?>
+
+        <form action="/admin/project/new" method="post" enctype="multipart/form-data" novalidate>
+
+            <div class="form-section">
+                <p class="form-section__label">Informations générales</p>
+
+                <div class="field">
+                    <label for="name">Nom du projet</label>
+                    <input type="text" id="name" name="name"
+                        value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
+                        placeholder="Ex : Résidence Thales" required>
+                </div>
+
+                <div class="field">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"
+                        placeholder="Description du projet" required
+                    ><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="location">Localisation</label>
+                        <input type="text" id="location" name="location"
+                            value="<?= htmlspecialchars($_POST['location'] ?? '') ?>"
+                            placeholder="Ex : Agen, France" required>
+                    </div>
+                    <div class="field">
+                        <label for="year">Année</label>
+                        <input type="number" id="year" name="year"
+                            value="<?= htmlspecialchars($_POST['year'] ?? date('Y')) ?>"
+                            required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="category">Catégorie</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>— Sélectionner —</option>
+                        <?php foreach (['Collectif', 'Individuel', 'Autre'] as $cat) : ?>
+                            <option value="<?= $cat ?>" <?= (($_POST['category'] ?? '') === $cat) ? 'selected' : '' ?>>
+                                <?= $cat ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="field field--checkbox">
+                    <label>
+                        <input type="checkbox" name="built" value="1" <?= !empty($_POST['built']) ? 'checked' : '' ?>>
+                        Projet réalisé (construit)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <p class="form-section__label">Images du projet</p>
+                <div class="upload-zone">
+                    <input type="file" id="images" name="images[]"
+                        accept=".jpg,.jpeg,.png,.webp" multiple required>
+                    <div class="upload-zone__icon">⊕</div>
+                    <p class="upload-zone__text">
+                        <strong>Cliquez pour sélectionner</strong> ou glissez vos images<br>
+                        <small>Maintenez Ctrl (Windows) ou Cmd (Mac) pour sélectionner plusieurs fichiers</small>
+                    </p>
+                    <p class="upload-zone__hint">JPG · PNG · WEBP · Max 2 Mo par image</p>
+                </div>
+                <div id="preview-grid" class="preview-grid"></div>
+                <p id="preview-count" class="preview-count"></p>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" name="submit" class="btn btn--primary">Créer le projet</button>
+                <a href="/admin/project" class="btn btn--ghost">Annuler</a>
+            </div>
+        </form>
+    </main>
+</div>
+
+<?php include __DIR__ . '/component/footer.php'; ?>

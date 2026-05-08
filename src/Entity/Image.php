@@ -4,7 +4,7 @@ namespace App\Entity;
 
 class Image
 {
-    private ?int $id;
+    private ?int $id = null;
     private string $filename;
     private string $altText;
     private bool $isCover;
@@ -13,27 +13,26 @@ class Image
     private int $projectId;
 
     public function __construct(
-        string $filename = 'image_Logo_dBa.webp',
-        bool $isCover = false,
-        int $sortOrder = 0,
-        int $projectId = 0
+        string $filename  = '',
+        bool   $isCover   = false,
+        int    $sortOrder = 0,
+        int    $projectId = 0
     ) {
-        $this->filename = $filename;
-        $this->altText = $filename;
-        $this->isCover = $isCover;
-        $this->sortOrder = $sortOrder;
-        $this->projectId = $projectId;
+        $this->filename   = $filename;
+        $this->altText    = $filename;
+        $this->isCover    = $isCover;
+        $this->sortOrder  = $sortOrder;
+        $this->projectId  = $projectId;
         $this->uploadedAt = new \DateTime();
     }
 
-
-    public function getId(): ?int
-    {
+    public function getId(): ?int           
+    { 
         return $this->id;
     }
 
     public function setId(int $id): void
-    {
+    { 
         $this->id = $id;
     }
 
@@ -42,7 +41,7 @@ class Image
         return $this->filename;
     }
 
-    public function setFilename(string $filename): void
+    public function setFilename(string $filename): void  
     {
         $this->filename = $filename;
     }
@@ -87,7 +86,7 @@ class Image
         $this->uploadedAt = $uploadedAt;
     }
 
-        public function getProjectId(): int
+    public function getProjectId(): int
     {
         return $this->projectId;
     }
@@ -95,6 +94,11 @@ class Image
     public function setProjectId(int $projectId): void
     {
         $this->projectId = $projectId;
+    }
+
+    public function getWebPath(): string
+    {
+        return '/assets/media/' . $this->filename;
     }
 
     public function getPath(): string

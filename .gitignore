@@ -1,4 +1,2 @@
 vendor/
 .env
-composer.lock
-public/assets/fonts

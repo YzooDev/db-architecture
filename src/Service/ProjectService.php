@@ -7,82 +7,119 @@ use App\Service\UploadService;
 use App\Repository\ProjectRepository;
 use App\Utils\Tools;
 
-class ProjectService 
+class ProjectService
 {
     private ProjectRepository $projectRepository;
-    private UploadService $uploadService;
+    private UploadService     $uploadService;
 
     public function __construct()
     {
-        $this->projectRepository = new ProjectRepository;
-        $this->uploadService = new UploadService;
+        $this->projectRepository = new ProjectRepository();
+        $this->uploadService     = new UploadService();
     }
 
-    public function getAllProject()
+    public function getAllProject(): array
     {
-        return $this->projectRepository->findAllProject();
+        return $this->projectRepository->findAllProjects();
     }
 
-    public function insertProject(array $project, array $files = []): string
+    public function getProjectById(int $id): ?Project
     {
-        //1 Vérifier si les champs sont vides
+        return $this->projectRepository->findProjectById($id);
+    }
+
+    public function insertProject(array $post, array $files = []): string
+    {
         if (
-            empty($project["name"]) ||
-            empty($project["description"]) ||
-            empty($project["location"]) ||
-            empty($project["year"]) ||
-            empty($project["category"])
+            empty($post["name"]) ||
+            empty($post["description"]) ||
+            empty($post["location"]) ||
+            empty($post["year"]) ||
+            empty($post["category"])
         ) {
-            return "Veuillez remplir les champs obligatoires";
+            return "Veuillez remplir les champs obligatoires.";
         }
 
-        //2 Vérifier si il y a au moins une image
-        if (
-            empty($files["images"]["name"][0])
-        ) { 
-            return "Veuillez sélectionner au moins une image";
+        if (empty($files["images"]["name"][0])) {
+            return "Veuillez sélectionner au moins une image.";
         }
 
-        //3 Nettoyer les entrées utilisateurs
-        Tools::sanitize_array($project);
+        $existing = $this->projectRepository->findProjectByName($post["name"]);
+        if ($existing !== null) {
+            return "Un projet nommé \"" . htmlspecialchars($post["name"]) . "\" existe déjà.";
+        }
 
-        //3 Mapper le tableau (Super globale POST)
-        $newProject = $this->mapFromPost($project);
-        
-        //4 Ajout en BDD du projet et des images associées
-        $this->projectRepository->addProject($newProject);
+        Tools::sanitize_array($post);
 
-        $uploadErrors = $this->uploadService->uploadMultiple($files['images'], $newProject->getId());
+        $project = $this->buildFromPost($post);
+        $this->projectRepository->saveProject($project);
 
+        $uploadErrors = $this->uploadService->storeImages($files['images'], $project->getId());
 
-        return "Le projet : " . $newProject->getName() . " a été ajouté en BDD";
+        $message = "Le projet \"" . $project->getName() . "\" a été créé avec succès.";
+        if (!empty($uploadErrors)) {
+            $message .= " Erreurs images : " . implode(', ', $uploadErrors);
+        }
+
+        return $message;
     }
 
-        /**
-     * Méthode pour convertir la super globale POST (formulaire) en Entity Project
-     * @param array $project Super Globale POST
-     * @return Project Entity Project
-     */
-    private function mapFromPost(array $project): Project 
+    public function modifyProject(int $id, array $post): string
     {
-        //1 Créer un objet Project
-        $newProject = new Project(
-            $project["name"], 
-            $project["description"], 
-            $project["location"], 
-            $project["year"], 
-            $project["category"]
-        );
-        
-        //2 Set si la valeur est non vide
-        if(!empty($project["created_at"])) {
-            $newProject->setCreatedAt(new \DateTime($project["created_at"]));
-        }
-        if (!empty($project["built"])) {
-            $newProject->setBuilt(true);
+        if (
+            empty($post["name"]) ||
+            empty($post["description"]) ||
+            empty($post["location"]) ||
+            empty($post["year"]) ||
+            empty($post["category"])
+        ) {
+            return "Veuillez remplir les champs obligatoires.";
         }
 
-        return $newProject;
+        $project = $this->projectRepository->findProjectById($id);
+        if (!$project) {
+            return "Projet introuvable.";
+        }
+
+        Tools::sanitize_array($post);
+
+        $project->setName($post["name"]);
+        $project->setDescription($post["description"]);
+        $project->setLocation($post["location"]);
+        $project->setYear((int) $post["year"]);
+        $project->setCategory($post["category"]);
+        $project->setBuilt(!empty($post["built"]));
+
+        $this->projectRepository->updateProject($project);
+
+        return "Le projet \"" . $project->getName() . "\" a été mis à jour.";
     }
 
+    public function deleteProject(int $id): void
+    {
+        $project = $this->projectRepository->findProjectById($id);
+
+        if ($project !== null) {
+            $this->uploadService->deleteAllProjectFiles($project->getImages());
+        }
+
+        $this->projectRepository->destroyProject($id);
+    }
+
+    private function buildFromPost(array $post): Project
+    {
+        $project = new Project(
+            $post["name"],
+            $post["description"],
+            $post["location"],
+            (int) $post["year"],
+            $post["category"]
+        );
+
+        if (!empty($post["built"])) {
+            $project->setBuilt(true);
+        }
+
+        return $project;
+    }
 }
