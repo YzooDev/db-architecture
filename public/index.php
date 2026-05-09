@@ -69,7 +69,7 @@ switch (true) {
         (new ProjectController())->showAdminProject((int) $data[1]);
         break;
 
-    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data):
+    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'GET':
         (new ProjectController())->editProject((int) $data[1]);
         break;
 

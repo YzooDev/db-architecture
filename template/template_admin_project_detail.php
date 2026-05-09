@@ -34,15 +34,11 @@ include __DIR__ . '/component/header.php';
                 <a href="/admin/project" class="btn btn--ghost">← Retour</a>
             </div>
         </div>
-
-        <!-- Image de couverture -->
         <?php if ($cover) : ?>
             <img src="<?= htmlspecialchars($cover->getWebPath()) ?>"
                  alt="<?= htmlspecialchars($cover->getAltText()) ?>"
                  style="width:100%; height:320px; object-fit:cover; display:block; margin-bottom:40px;">
         <?php endif; ?>
-
-        <!-- Infos du projet -->
         <div class="project-detail" style="padding-top:0;">
             <div>
                 <h2 class="project-detail__name" style="font-size:1.4rem;"><?= htmlspecialchars($project->getName()) ?></h2>
@@ -71,8 +67,6 @@ include __DIR__ . '/component/header.php';
                 </div>
             </aside>
         </div>
-
-        <!-- Galerie -->
         <?php if (!empty($gallery)) : ?>
             <h3 style="font-family:'Playfair Display',serif; font-weight:400; margin-bottom:16px;">Galerie</h3>
             <div class="project-gallery" style="margin-top:0;">
@@ -83,7 +77,6 @@ include __DIR__ . '/component/header.php';
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-
     </main>
 </div>
 <?php include __DIR__ . '/component/footer.php'; ?>

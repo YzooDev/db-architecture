@@ -4,7 +4,7 @@ namespace App\Entity;
 
 class Image
 {
-    private ?int $id = null;
+    private ?int $id;
     private string $filename;
     private string $altText;
     private bool $isCover;
@@ -13,16 +13,16 @@ class Image
     private int $projectId;
 
     public function __construct(
-        string $filename  = '',
-        bool   $isCover   = false,
-        int    $sortOrder = 0,
-        int    $projectId = 0
+        string $filename = '',
+        bool $isCover = false,
+        int $sortOrder = 0,
+        int $projectId = 0
     ) {
-        $this->filename   = $filename;
-        $this->altText    = $filename;
-        $this->isCover    = $isCover;
-        $this->sortOrder  = $sortOrder;
-        $this->projectId  = $projectId;
+        $this->filename = $filename;
+        $this->altText = $filename;
+        $this->isCover = $isCover;
+        $this->sortOrder = $sortOrder;
+        $this->projectId = $projectId;
         $this->uploadedAt = new \DateTime();
     }
 
@@ -31,7 +31,7 @@ class Image
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     { 
         $this->id = $id;
     }

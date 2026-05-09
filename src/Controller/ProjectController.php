@@ -17,8 +17,6 @@ class ProjectController extends AbstractController
         $this->uploadService  = new UploadService();
     }
 
-    // Pages publiques
-
     public function showAllProject(): void
     {
         $projects = $this->projectService->getAllProject();
@@ -37,8 +35,6 @@ class ProjectController extends AbstractController
 
         $this->render("project_detail", $project->getName(), ['project' => $project]);
     }
-
-    // Pages admin projets
 
     public function listProjects(): void
     {
@@ -105,12 +101,10 @@ class ProjectController extends AbstractController
         $this->redirect('/admin/project');
     }
 
-    // Pages admin images 
-
     public function storeImages(int $projectId): void
     {
         $this->isConnected();
-        $project    = $this->projectService->getProjectById($projectId);
+        $project = $this->projectService->getProjectById($projectId);
         $existCount = $project ? count($project->getImages()) : 0;
 
         $this->uploadService->storeImages(

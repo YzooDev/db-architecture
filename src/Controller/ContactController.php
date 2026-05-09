@@ -27,7 +27,6 @@ class ContactController extends AbstractController
                 'description' => trim($_POST['description'] ?? ''),
             ];
 
-            // Validation
             if (empty($formData['firstname'])) {
                 $errors['firstname'] = 'Le prénom est requis.';
             }
@@ -41,7 +40,6 @@ class ContactController extends AbstractController
                 $errors['description'] = 'Le message est requis.';
             }
 
-            // Envoi si pas d'erreurs
             if (empty($errors)) {
                 $mailer = new MailService();
                 $mailer->sendContactMail($formData);

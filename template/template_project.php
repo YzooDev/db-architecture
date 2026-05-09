@@ -11,7 +11,6 @@ include __DIR__ . '/component/header.php';
                 <span class="projects-count"><?= count($projects) ?> réalisation<?= count($projects) > 1 ? 's' : '' ?></span>
             <?php endif; ?>
         </div>
-
         <?php if (empty($projects)) : ?>
             <p class="empty-state">Aucun projet disponible pour le moment.</p>
         <?php else : ?>
@@ -25,7 +24,6 @@ include __DIR__ . '/component/header.php';
                         $cover = $project->getImages()[0];
                     }
                 ?>
-                <!-- MODIFICATION 3 : lien vers le détail du projet -->
                 <a href="/project/<?= $project->getId() ?>" class="project-card">
                     <?php if ($cover) : ?>
                         <img src="<?= htmlspecialchars($cover->getWebPath()) ?>"

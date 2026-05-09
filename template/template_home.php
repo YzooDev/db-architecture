@@ -3,16 +3,12 @@
 include __DIR__ . '/component/header.php';
 ?>
 <main>
-
-    <!-- Section hero -->
     <section class="hero" style="padding-inline: clamp(24px, 5vw, 80px); max-width: 1280px; margin-inline: auto;">
         <p class="hero__eyebrow">Architecture &amp; Conception</p>
         <h1 class="hero__title">Concevoir des espaces<br><em>qui durent</em></h1>
         <p class="hero__desc">Cabinet d'architecture basé dans le Tarn (Peyrole), spécialisé dans les projets résidentiels, commerciaux et institutionnels.</p>
         <a href="/project" class="hero__cta">Découvrir les projets →</a>
     </section>
-
-    <!-- MODIFICATION 2 : section présentation Daniel Bezes avec portrait -->
     <section style="padding-inline: clamp(24px, 5vw, 80px);">
         <article class="presentation">
             <div class="presentation__content">
@@ -31,13 +27,9 @@ include __DIR__ . '/component/header.php';
                 <a href="/contact" class="hero__cta" style="margin-top: 24px;">Prendre contact →</a>
             </div>
             <div class="presentation__portrait">
-                <img
-                    src="/assets/img/portrait_Daniel_Bezes.webp"
-                    alt="Daniel Bezes, architecte DPLG"
-                >
+                <img src="/assets/img/portrait_Daniel_Bezes.webp" alt="Daniel Bezes, architecte DPLG">
             </div>
         </article>
     </section>
-
 </main>
 <?php include __DIR__ . '/component/footer.php'; ?>

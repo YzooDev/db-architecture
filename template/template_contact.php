@@ -41,8 +41,7 @@ include __DIR__ . '/component/header.php';
             </div>
             <div class="field">
                 <label for="description">Message</label>
-                <textarea id="description" name="description" rows="8" required
-                ><?= htmlspecialchars($formData['description'] ?? '') ?></textarea>
+                <textarea id="description" name="description" rows="8" required><?= htmlspecialchars($formData['description'] ?? '') ?></textarea>
                 <?php if (!empty($errors['description'])) : ?>
                     <p class="alert alert--error"><?= $errors['description'] ?></p>
                 <?php endif; ?>

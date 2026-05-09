@@ -41,6 +41,7 @@ ul {
 }
 
 header {
+  font-family: "Hind Madurai", system-ui, sans-serif;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;

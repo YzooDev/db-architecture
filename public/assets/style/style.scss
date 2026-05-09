@@ -28,6 +28,7 @@ ul   { list-style: none; }
 
 // Header / Nav
 header {
+    font-family: $font-sans;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;

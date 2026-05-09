@@ -10,12 +10,12 @@ use App\Utils\Tools;
 class ProjectService
 {
     private ProjectRepository $projectRepository;
-    private UploadService     $uploadService;
+    private UploadService $uploadService;
 
     public function __construct()
     {
         $this->projectRepository = new ProjectRepository();
-        $this->uploadService     = new UploadService();
+        $this->uploadService = new UploadService();
     }
 
     public function getAllProject(): array
@@ -51,7 +51,7 @@ class ProjectService
 
         Tools::sanitize_array($post);
 
-        $project = $this->buildFromPost($post);
+        $project = $this->mapFromPost($post);
         $this->projectRepository->saveProject($project);
 
         $uploadErrors = $this->uploadService->storeImages($files['images'], $project->getId());
@@ -106,7 +106,7 @@ class ProjectService
         $this->projectRepository->destroyProject($id);
     }
 
-    private function buildFromPost(array $post): Project
+    private function mapFromPost(array $post): Project
     {
         $project = new Project(
             $post["name"],

@@ -26,8 +26,7 @@ class SecurityController extends AbstractController
             $data["msg"] = $this->securityService->login($_POST);
 
             if ($data["msg"] === "Vous etes connecté") {
-                // Prévient la fixation de session (session fixation attack) :
-                // un attaquant ne peut pas réutiliser un ID de session volé avant login.
+            
                 session_regenerate_id(true);
                 $this->redirect('/admin/project');
             }

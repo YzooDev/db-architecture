@@ -17,7 +17,6 @@ include __DIR__ . '/component/header.php';
             <h1>Projets</h1>
             <a href="/admin/project/new" class="btn btn--primary">+ Nouveau projet</a>
         </div>
-
         <?php if (empty($projects)) : ?>
             <p class="empty-state">Aucun projet. <a href="/admin/project/new">Créer le premier →</a></p>
         <?php else : ?>
@@ -30,7 +29,6 @@ include __DIR__ . '/component/header.php';
                         <th>Localisation</th>
                         <th>Année</th>
                         <th>Images</th>
-                        <!-- MODIFICATION 4 : colonne actions -->
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -60,11 +58,8 @@ include __DIR__ . '/component/header.php';
                         <td><?= $nbImgs ?></td>
                         <td>
                             <div class="admin-table__actions">
-                                <!-- Voir le détail -->
                                 <a href="/admin/project/<?= $project->getId() ?>" class="btn-link">Voir</a>
-                                <!-- Modifier -->
                                 <a href="/admin/project/<?= $project->getId() ?>/edit" class="btn btn--primary btn--sm">Modifier</a>
-                                <!-- MODIFICATION 4 : supprimer avec confirmation JavaScript -->
                                 <form action="/admin/project/<?= $project->getId() ?>/delete" method="post"
                                       onsubmit="return confirm('Supprimer le projet « <?= addslashes($project->getName()) ?> » ? Cette action est irréversible.')">
                                     <button type="submit" class="btn btn--danger btn--sm">Supprimer</button>

@@ -13,13 +13,10 @@
             <h1>Ajouter une image</h1>
             <a href="/admin/project" class="btn btn--ghost">← Retour</a>
         </div>
-
         <?php if (!empty($data['msg'])) : ?>
             <p class="alert alert--success"><?= htmlspecialchars($data['msg']) ?></p>
         <?php endif; ?>
-
         <form action="/admin/project/image" method="post" enctype="multipart/form-data" novalidate>
-
             <div class="form-section">
                 <p class="form-section__label">Projet associé</p>
                 <div class="field">
@@ -38,7 +35,6 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-section">
                 <p class="form-section__label">Image</p>
                 <div class="upload-zone">
@@ -48,7 +44,6 @@
                     <p class="upload-zone__hint">JPG · PNG · WEBP · Max 2 Mo</p>
                 </div>
             </div>
-
             <div class="form-actions">
                 <button type="submit" name="submit" class="btn btn--primary">Uploader</button>
                 <a href="/admin/project" class="btn btn--ghost">Annuler</a>

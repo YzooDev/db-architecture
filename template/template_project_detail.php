@@ -14,8 +14,6 @@ if (!$cover && count($project->getImages()) > 0) {
 include __DIR__ . '/component/header.php';
 ?>
 <main>
-
-    <!-- Image de couverture pleine largeur -->
     <div class="project-hero">
         <?php if ($cover) : ?>
             <img
@@ -27,8 +25,6 @@ include __DIR__ . '/component/header.php';
             <div class="project-hero__placeholder">Aucune image</div>
         <?php endif; ?>
     </div>
-
-    <!-- Détail du projet -->
     <div style="padding-inline: clamp(24px, 5vw, 80px); max-width: 1280px; margin-inline: auto;">
         <div class="project-detail">
             <div>
@@ -54,8 +50,6 @@ include __DIR__ . '/component/header.php';
                 </div>
             </aside>
         </div>
-
-        <!-- Galerie des images -->
         <?php if (!empty($gallery)) : ?>
             <div class="project-gallery">
                 <?php foreach ($gallery as $image) : ?>
@@ -68,11 +62,9 @@ include __DIR__ . '/component/header.php';
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-
         <div style="padding-bottom: 80px; margin-top: 40px;">
             <a href="/project" style="font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; border-bottom:1px solid #e8e3db;">← Tous les projets</a>
         </div>
     </div>
-
 </main>
 <?php include __DIR__ . '/component/footer.php'; ?>
