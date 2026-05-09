@@ -254,6 +254,7 @@ main { padding-inline: $gutter; }
         padding-bottom: 3px;
         transition: color $transition, border-color $transition;
         align-self: flex-start;
+        margin-top: 40px;
 
         &:hover { color: $gold; border-color: $gold; }
     }
@@ -410,16 +411,16 @@ main { padding-inline: $gutter; }
 }
 
 .back-link {
-    padding-bottom: 80px;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-bottom: 1px solid $text-color;
+    padding-bottom: 3px;
+    transition: color $transition, border-color $transition;
+    align-self: flex-start;
+    margin-top: 40px;
 
-    a {
-        font-size: 0.8rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        border-bottom: 1px solid $stone;
-        transition: color $transition, border-color $transition;
-        &:hover { color: $gold; border-color: $gold; }
-    }
+    &:hover { color: $gold; border-color: $gold; }
 }
 
 // Alertes

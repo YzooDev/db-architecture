@@ -63,7 +63,7 @@ include __DIR__ . '/component/header.php';
             </div>
         <?php endif; ?>
         <div style="padding-bottom: 80px; margin-top: 40px;">
-            <a href="/project" style="font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; border-bottom:1px solid #e8e3db;">← Tous les projets</a>
+            <a href="/project" class="back-link">← Tous les projets</a>
         </div>
     </div>
 </main>
