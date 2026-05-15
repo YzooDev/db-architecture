@@ -16,7 +16,7 @@ include __DIR__ . '/component/header.php';
     <main class="admin-main">
         <div class="admin-page-header">
             <h1>Modifier le projet</h1>
-            <a href="/admin/project/<?= $project->getId() ?>" class="btn btn--ghost">← Retour</a>
+            <a href="/admin/project" class="btn btn--ghost">← Retour</a>
         </div>
         <?php if (!empty($msg)) : ?>
             <p class="alert alert--success" style="margin-bottom:32px;"><?= htmlspecialchars($msg) ?></p>
@@ -59,13 +59,12 @@ include __DIR__ . '/component/header.php';
                 </div>
                 <div class="field field--checkbox">
                     <label>
-                        <input type="checkbox" name="built" value="1" <?= $project->getBuilt() ? 'checked' : '' ?>>
-                        Projet réalisé (construit)
+                        <input type="checkbox" name="built" value="1" <?= $project->getBuilt() ? 'checked' : '' ?>> Projet réalisé (construit)
                     </label>
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn btn--primary">Enregistrer les modifications</button>
+                <button type="submit" name="submit_edit" class="btn btn--primary">Enregistrer les modifications</button>
                 <a href="/admin/project" class="btn btn--ghost">Annuler</a>
             </div>
         </form>
@@ -84,18 +83,24 @@ include __DIR__ . '/component/header.php';
                         <div class="media-card__actions">
                             <?php if (!$image->getIsCover()) : ?>
                                 <form action="/admin/project/<?= $project->getId() ?>/image/<?= $image->getId() ?>/cover" method="post">
-                                    <button type="submit" class="btn-media btn-media--cover" title="Définir comme couverture">
+                                    <button type="submit" name="submit_cover" class="btn-media btn-media--cover" title="Définir comme couverture">
                                         ☆ Couverture
                                     </button>
                                 </form>
                             <?php else : ?>
                                 <span class="btn-media btn-media--is-cover">★ Couverture</span>
                             <?php endif; ?>
-                            <form action="/admin/project/<?= $project->getId() ?>/image/<?= $image->getId() ?>/delete" method="post" onsubmit="return confirm('Supprimer cette image définitivement ?')">
-                                <button type="submit" class="btn-media btn-media--delete" title="Supprimer">
+                            <?php if (count($project->getImages()) > 1) : ?>
+                                <form action="/admin/project/<?= $project->getId() ?>/image/<?= $image->getId() ?>/delete"  method="post" onsubmit="return confirm ('Supprimer cette image définitivement ?')">
+                                    <button type="submit" name="submit_delete_image" class="btn-media btn-media--delete">
+                                        ✕ Supprimer
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <button type="button" class="btn-media btn-media--delete" title="Impossible de supprimer la dernière image du projet" disabled >
                                     ✕ Supprimer
                                 </button>
-                            </form>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?php endforeach; ?>
@@ -121,7 +126,7 @@ include __DIR__ . '/component/header.php';
                 <div id="preview-grid" class="preview-grid"></div>
                 <p id="preview-count" class="preview-count"></p>
                 <div class="form-actions" style="margin-top: 24px;">
-                    <button type="submit" class="btn btn--primary">Ajouter les images</button>
+                    <button type="submit" name="submit_upload" class="btn btn--primary">Ajouter les images</button>
                 </div>
             </form>
         </div>

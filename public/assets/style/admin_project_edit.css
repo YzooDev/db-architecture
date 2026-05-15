@@ -1,0 +1,602 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  font-weight: 300;
+  background-color: #f4f1eb;
+  color: #1c1c1c;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 80px);
+}
+
+header {
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 16px clamp(24px, 5vw, 80px);
+  background: #f4f1eb;
+  border-bottom: 1px solid #e0dbd2;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header img {
+  width: clamp(100px, 14vw, 180px);
+}
+header nav {
+  font-family: "Roboto", "Hind Madurai", system-ui, sans-serif;
+  letter-spacing: 1px;
+}
+header nav ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+}
+header nav ul li a {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
+}
+header nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #826128;
+  transition: width 0.3s ease;
+}
+header nav ul li a:hover {
+  color: #826128;
+}
+header nav ul li a:hover::after, header nav ul li a.active::after {
+  width: 100%;
+}
+
+footer {
+  border-top: 1px solid #e0dbd2;
+  padding: 40px clamp(24px, 5vw, 80px);
+  margin-top: 100px;
+}
+footer .footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #2e2e2e;
+  letter-spacing: 0.05em;
+}
+footer .footer-inner .footer-column {
+  transition: color 0.3s ease, border-color 0.3s ease;
+  text-align: center;
+}
+footer .footer-inner .footer-column a:hover {
+  color: #826128;
+}
+
+main {
+  padding-inline: clamp(24px, 5vw, 80px);
+}
+
+.section {
+  padding-top: 72px;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.section--center {
+  text-align: center;
+  padding-block: 120px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+.section-header h1, .section-header h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 400;
+}
+.section-header__link {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #736D64;
+  border-bottom: 1px solid #e0dbd2;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.section-header__link:hover {
+  color: #1c1c1c;
+  border-color: #1c1c1c;
+}
+
+.projects-count {
+  font-size: 0.75rem;
+  color: #736D64;
+  letter-spacing: 0.1em;
+}
+
+.empty-state {
+  color: #736D64;
+  font-size: 0.9rem;
+  padding-bottom: 80px;
+}
+.empty-state a {
+  border-bottom: 1px solid #e0dbd2;
+}
+
+.admin-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  background: #1c1c1c;
+  color: #ffffff;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.admin-sidebar__brand {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1rem;
+  font-weight: 400;
+  border-bottom: 1px solid #2e2e2e;
+  padding-bottom: 24px;
+}
+.admin-sidebar__brand span {
+  display: block;
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e0dbd2;
+  margin-top: 4px;
+}
+.admin-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.admin-sidebar__nav a {
+  display: block;
+  color: #e0dbd2;
+  padding: 9px 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.admin-sidebar__nav a:hover, .admin-sidebar__nav a.active {
+  color: #ffffff;
+  background: #2e2e2e;
+}
+
+.admin-main {
+  padding: 56px clamp(32px, 5vw, 72px);
+  max-width: 1000px;
+}
+
+.admin-page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e0dbd2;
+}
+.admin-page-header h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.alert {
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  margin-bottom: 24px;
+}
+.alert--success {
+  background: #f0f7f0;
+  border-left: 3px solid #5a9a6a;
+  color: #2a5a35;
+}
+.alert--error {
+  background: #fdf0f0;
+  border-left: 3px solid #8b2020;
+  color: #8b2020;
+}
+
+.form {
+  max-width: 680px;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+.field label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #736D64;
+  margin-bottom: 8px;
+}
+.field input[type=text], .field input[type=email],
+.field input[type=password], .field input[type=number],
+.field select, .field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e0dbd2;
+  padding: 10px 0;
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #1c1c1c;
+  outline: none;
+  transition: border-color 0.3s ease;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+}
+.field input[type=text]:focus, .field input[type=email]:focus,
+.field input[type=password]:focus, .field input[type=number]:focus,
+.field select:focus, .field textarea:focus {
+  border-bottom-color: #1c1c1c;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.8;
+}
+.field--checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.form-section {
+  margin-bottom: 48px;
+}
+.form-section__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #736D64;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.form-section__label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e0dbd2;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 40px;
+  border-top: 1px solid #e0dbd2;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn--primary {
+  background: #1c1c1c;
+  color: #ffffff;
+}
+.btn--primary:hover {
+  background: #2e2e2e;
+}
+.btn--ghost {
+  background: transparent;
+  color: #736D64;
+  padding: 12px 0;
+}
+.btn--ghost:hover {
+  color: #1c1c1c;
+}
+
+.btn-link {
+  font-size: 0.75rem;
+  color: #736D64;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #e0dbd2;
+  transition: color 0.3s ease;
+}
+.btn-link:hover {
+  color: #1c1c1c;
+}
+
+.upload-zone {
+  border: 1px dashed #e0dbd2;
+  padding: 48px 32px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.upload-zone:hover {
+  border-color: #736D64;
+  background: rgba(0, 0, 0, 0.01);
+}
+.upload-zone input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.upload-zone__icon {
+  font-size: 2rem;
+  color: #736D64;
+  margin-bottom: 14px;
+}
+.upload-zone__text {
+  font-size: 0.85rem;
+  color: #736D64;
+  line-height: 1.7;
+}
+.upload-zone__hint {
+  margin-top: 10px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #e0dbd2;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.preview-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #e0dbd2;
+}
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.preview-item__badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: #1c1c1c;
+  color: #ffffff;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+}
+
+.preview-count {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: #736D64;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.media-card {
+  border: 1px solid #e0dbd2;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+.media-card--cover {
+  border: 2px solid #826128;
+}
+.media-card__img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #e0dbd2;
+}
+.media-card__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+.media-card__badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #826128;
+  color: #ffffff;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+}
+.media-card__actions {
+  display: flex;
+  border-top: 1px solid #e0dbd2;
+}
+
+.btn-media {
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+}
+.btn-media--cover {
+  color: #736D64;
+  border-right: 1px solid #e0dbd2;
+}
+.btn-media--cover:hover {
+  background: #ffffff;
+  color: #826128;
+}
+.btn-media--is-cover {
+  color: #826128;
+  border-right: 1px solid #e0dbd2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+}
+.btn-media--delete {
+  color: #736D64;
+}
+.btn-media--delete:hover {
+  background: #e0dbd2;
+  color: #8b2020;
+}
+.btn-media--disabled {
+  color: #e0dbd2;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .presentation {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 48px 0;
+  }
+  .presentation__portrait {
+    width: 100%;
+  }
+  .presentation__portrait img {
+    height: 360px;
+  }
+  .project-detail {
+    grid-template-columns: 1fr;
+  }
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+  .login-page__visual {
+    display: none;
+  }
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+  .admin-sidebar {
+    position: static;
+    height: auto;
+  }
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  header {
+    grid-template-columns: 1fr;
+  }
+  header nav ul {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+  .admin-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}/*# sourceMappingURL=admin_project_edit.css.map */

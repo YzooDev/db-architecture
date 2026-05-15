@@ -1,0 +1,145 @@
+.form {
+  max-width: 680px;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+.field label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #736D64;
+  margin-bottom: 8px;
+}
+.field input[type=text], .field input[type=email],
+.field input[type=password], .field input[type=number],
+.field select, .field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e0dbd2;
+  padding: 10px 0;
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #1c1c1c;
+  outline: none;
+  transition: border-color 0.3s ease;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+}
+.field input[type=text]:focus, .field input[type=email]:focus,
+.field input[type=password]:focus, .field input[type=number]:focus,
+.field select:focus, .field textarea:focus {
+  border-bottom-color: #1c1c1c;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.8;
+}
+.field--checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.form-section {
+  margin-bottom: 48px;
+}
+.form-section__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #736D64;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.form-section__label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e0dbd2;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 40px;
+  border-top: 1px solid #e0dbd2;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-family: "Hind Madurai", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn--primary {
+  background: #1c1c1c;
+  color: #ffffff;
+}
+.btn--primary:hover {
+  background: #2e2e2e;
+}
+.btn--ghost {
+  background: transparent;
+  color: #736D64;
+  padding: 12px 0;
+}
+.btn--ghost:hover {
+  color: #1c1c1c;
+}
+
+.btn-link {
+  font-size: 0.75rem;
+  color: #736D64;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #e0dbd2;
+  transition: color 0.3s ease;
+}
+.btn-link:hover {
+  color: #1c1c1c;
+}
+
+.alert {
+  padding: 14px 20px;
+  font-size: 0.85rem;
+  margin-bottom: 24px;
+}
+.alert--success {
+  background: #f0f7f0;
+  border-left: 3px solid #5a9a6a;
+  color: #2a5a35;
+}
+.alert--error {
+  background: #fdf0f0;
+  border-left: 3px solid #8b2020;
+  color: #8b2020;
+}/*# sourceMappingURL=form.css.map */

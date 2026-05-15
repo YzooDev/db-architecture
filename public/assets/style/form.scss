@@ -1,0 +1,154 @@
+@import "./variables.scss";
+
+// Formulaires
+.form { 
+    max-width: 680px; 
+}
+
+.field {
+    margin-bottom: 24px;
+
+    label {
+        display: block;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: $grey;
+        margin-bottom: 8px;
+    }
+
+    input[type="text"], input[type="email"],
+    input[type="password"], input[type="number"],
+    select, textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid $stone;
+        padding: 10px 0;
+        font-family: $font-sans;
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: $text-color;
+        outline: none;
+        transition: border-color $transition;
+        appearance: none;
+        border-radius: 0;
+
+        &:focus { 
+            border-bottom-color: $text-color; 
+        }
+    }
+
+    textarea { 
+        resize: vertical; min-height: 120px; line-height: 1.8; 
+    }
+
+    &--checkbox label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.85rem;
+        text-transform: none;
+        letter-spacing: 0;
+        cursor: pointer;
+    }
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.form-section {
+    margin-bottom: 48px;
+
+    &__label {
+        font-size: 0.65rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: $grey;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        &::after { 
+            content: ''; flex: 1; height: 1px; background: $stone; 
+        }
+    }
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-top: 40px;
+    border-top: 1px solid $stone;
+}
+
+// Boutons
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    font-family: $font-sans;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    transition: background-color $transition, color $transition;
+
+    &--primary { 
+        background: $text-color; 
+        color: $white; 
+
+        &:hover { 
+            background: $anthracite; 
+        } 
+    }
+    &--ghost { 
+        background: transparent; 
+        color: $grey; 
+        padding: 12px 0;
+        
+        &:hover { 
+            color: $text-color; 
+        } 
+    }
+}
+
+.btn-link {
+    font-size: 0.75rem;
+    color: $grey;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid $stone;
+    transition: color $transition;
+
+    &:hover { 
+        color: $text-color; 
+    }
+}
+
+// Alertes
+.alert {
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+
+    &--success {
+        background: #f0f7f0;
+        border-left: 3px solid #5a9a6a;
+        color: $success;
+    }
+
+    &--error {
+        background: #fdf0f0;
+        border-left: 3px solid $danger;
+        color: $danger;
+    }
+}

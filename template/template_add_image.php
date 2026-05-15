@@ -22,7 +22,7 @@
                 <div class="field">
                     <label for="project_id">Sélectionner le projet</label>
                     <select id="project_id" name="project_id" required>
-                        <option value="">— Sélectionner un projet —</option>
+                        <option value="">Sélectionner un projet</option>
                         <?php if (!empty($data['projects'])) : ?>
                             <?php foreach ($data['projects'] as $project) : ?>
                                 <option value="<?= $project->getId() ?>">

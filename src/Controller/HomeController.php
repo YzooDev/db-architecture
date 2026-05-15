@@ -10,4 +10,9 @@ class HomeController extends AbstractController
     {
         $this->render("home", "Accueil");
     }
+
+    public function legal(): void
+    {
+        $this->render("terms", "Mentions légales & CGU");
+    }
 }

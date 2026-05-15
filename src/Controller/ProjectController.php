@@ -55,49 +55,38 @@ class ProjectController extends AbstractController
         $this->render("add_project", "Ajouter un projet", $data);
     }
 
-    public function showAdminProject(int $id): void
-    {
-        $this->isConnected();
-        $project = $this->projectService->getProjectById($id);
-
-        if (!$project) {
-            $this->redirect('/admin/project');
-        }
-
-        $this->render("admin_project_detail", $project->getName(), ['project' => $project]);
-    }
 
     public function editProject(int $id): void
-    {
-        $this->isConnected();
-        $project = $this->projectService->getProjectById($id);
+{
+    $this->isConnected();
 
-        if (!$project) {
-            $this->redirect('/admin/project');
-        }
+    $project = $this->projectService->getProjectById($id);
 
-        $this->render("admin_project_edit", "Modifier : " . $project->getName(), [
-            'project' => $project,
-            'msg' => null,
-        ]);
+    if (!$project) {
+        $this->redirect('/admin/project');
     }
 
-    public function updateProject(int $id): void
-    {
-        $this->isConnected();
+    $msg = null;
+
+    if (isset($_POST["submit_edit"])) {
         $msg = $this->projectService->modifyProject($id, $_POST);
         $project = $this->projectService->getProjectById($id);
-
-        $this->render("admin_project_edit", "Modifier : " . ($project ? $project->getName() : ''), [
-            'project' => $project,
-            'msg' => $msg,
-        ]);
     }
+
+    $this->render("admin_project_edit", "Modifier : " . $project->getName(), [
+        'project' => $project,
+        'msg'     => $msg,
+    ]);
+}
 
     public function removeProject(int $id): void
     {
         $this->isConnected();
-        $this->projectService->deleteProject($id);
+        
+        if (isset($_POST["submit_delete"])) {
+            $this->projectService->deleteProject($id);
+        }
+
         $this->redirect('/admin/project');
     }
 
@@ -119,14 +108,22 @@ class ProjectController extends AbstractController
     public function assignCoverImage(int $projectId, int $imageId): void
     {
         $this->isConnected();
-        $this->uploadService->defineCoverImage($imageId, $projectId);
+        
+        if (isset($_POST["submit_cover"])) {
+            $this->uploadService->defineCoverImage($imageId, $projectId);
+        }
+
         $this->redirect('/admin/project/' . $projectId . '/edit');
     }
 
     public function removeImage(int $projectId, int $imageId): void
     {
         $this->isConnected();
-        $this->uploadService->deleteImageFile($imageId, $projectId);
+        
+        if (isset($_POST["submit_delete_image"])) {
+            $this->uploadService->deleteImageFile($imageId, $projectId);
+        }
+
         $this->redirect('/admin/project/' . $projectId . '/edit');
     }
 }

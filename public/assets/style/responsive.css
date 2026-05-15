@@ -1,0 +1,56 @@
+@media (max-width: 900px) {
+  .presentation {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 48px 0;
+  }
+  .presentation__portrait {
+    width: 100%;
+  }
+  .presentation__portrait img {
+    height: 360px;
+  }
+  .project-detail {
+    grid-template-columns: 1fr;
+  }
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+  .login-page__visual {
+    display: none;
+  }
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+  .admin-sidebar {
+    position: static;
+    height: auto;
+  }
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  header {
+    grid-template-columns: 1fr;
+  }
+  header nav ul {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+  .admin-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}/*# sourceMappingURL=responsive.css.map */

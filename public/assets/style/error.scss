@@ -1,0 +1,50 @@
+@import "./variables.scss";
+@import "./components.scss";
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    font-family: $font-sans;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    transition: background-color $transition, color $transition;
+
+    &--primary { 
+        background: $text-color; 
+        color: $white; 
+
+        &:hover { 
+            background: $anthracite; 
+        } 
+    }
+    &--ghost { 
+        background: transparent; 
+        color: $grey; 
+        padding: 12px 0;
+        
+        &:hover { 
+            color: $text-color; 
+        } 
+    }
+}
+
+.btn-link {
+    font-size: 0.75rem;
+    color: $grey;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid $stone;
+    transition: color $transition;
+
+    &:hover { 
+        color: $text-color; 
+    }
+}
+
+@import "./responsive.scss";

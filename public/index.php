@@ -15,7 +15,6 @@ use App\Controller\HomeController;
 use App\Controller\ProjectController;
 use App\Controller\ContactController;
 use App\Controller\SecurityController;
-use App\Controller\UploadController;
 
 switch (true) {
 
@@ -37,13 +36,13 @@ switch (true) {
         (new ContactController())->handle();
         break;
 
+    case $path === '/terms':
+        (new HomeController())->legal();
+        break;
+
     // Authentification
 
     case $path === '/admin':
-        (new SecurityController())->connection();
-        break;
-
-    case $path === '/admin' && $_SERVER['REQUEST_METHOD'] === 'POST':
         (new SecurityController())->connection();
         break;
 
@@ -61,37 +60,25 @@ switch (true) {
         (new ProjectController())->createProject();
         break;
 
-    case $path === '/admin/project/new' && $_SERVER['REQUEST_METHOD'] === 'POST':
-        (new ProjectController())->createProject();
-        break;
-
-    case (bool) preg_match('#^/admin/project/(\d+)$#', $path, $data):
-        (new ProjectController())->showAdminProject((int) $data[1]);
-        break;
-
-    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'GET':
+    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data) :
         (new ProjectController())->editProject((int) $data[1]);
         break;
 
-    case (bool) preg_match('#^/admin/project/(\d+)/edit$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
-        (new ProjectController())->updateProject((int) $data[1]);
-        break;
-
-    case (bool) preg_match('#^/admin/project/(\d+)/delete$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+    case (bool) preg_match('#^/admin/project/(\d+)/delete$#', $path, $data) :
         (new ProjectController())->removeProject((int) $data[1]);
         break;
 
     // Admin gestion images d'un projet
 
-    case (bool) preg_match('#^/admin/project/(\d+)/image/store$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+    case (bool) preg_match('#^/admin/project/(\d+)/image/store$#', $path, $data) :
         (new ProjectController())->storeImages((int) $data[1]);
         break;
 
-    case (bool) preg_match('#^/admin/project/(\d+)/image/(\d+)/cover$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+    case (bool) preg_match('#^/admin/project/(\d+)/image/(\d+)/cover$#', $path, $data) :
         (new ProjectController())->assignCoverImage((int) $data[1], (int) $data[2]);
         break;
 
-    case (bool) preg_match('#^/admin/project/(\d+)/image/(\d+)/delete$#', $path, $data) && $_SERVER['REQUEST_METHOD'] === 'POST':
+    case (bool) preg_match('#^/admin/project/(\d+)/image/(\d+)/delete$#', $path, $data) :
         (new ProjectController())->removeImage((int) $data[1], (int) $data[2]);
         break;
 

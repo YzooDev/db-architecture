@@ -1,0 +1,112 @@
+@import "./variables.scss";
+@import "./components.scss";
+@import "./admin.scss";
+@import "./form.scss";
+
+.admin-main {
+    overflow-x: hidden;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    th {
+        text-align: left;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: $grey;
+        padding: 12px 16px;
+        border-bottom: 1px solid $stone;
+        font-weight: 400;
+    }
+
+    td {
+        padding: 14px 16px;
+        border-bottom: 1px solid $stone;
+        vertical-align: middle;
+        color: $anthracite;
+    }
+
+    tr:hover td { 
+        background: rgba(0,0,0,0.02); 
+    }
+
+    &__thumb {
+        width: 56px; height: 40px;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__thumb-placeholder {
+        width: 56px; height: 40px;
+        background: $stone;
+        display: block;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: $bg-color;
+    color: $grey;
+    border: 1px solid $stone;
+}
+
+@media (max-width: 900px) {
+    .admin-table {
+
+        thead {
+            display: none;
+        }
+
+        tr {
+            display: block;
+            margin-bottom: 16px;
+            border: 1px solid $stone;
+            padding: 12px;
+        }
+
+        td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            padding: 6px 0;
+
+            &::before {
+                content: attr(data-label);
+                font-size: 0.65rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: $grey;
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-table__actions {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+    }
+}
+
+@import "./responsive.scss";
+

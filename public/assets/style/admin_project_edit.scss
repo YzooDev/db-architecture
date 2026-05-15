@@ -1,0 +1,100 @@
+@import "./variables.scss";
+@import "./components.scss";
+@import "./admin.scss";
+@import "./form.scss";
+@import "./upload.scss";
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.media-card {
+    border: 1px solid $stone;
+    overflow: hidden;
+    transition: border-color $transition;
+
+    &--cover {
+        border: 2px solid $gold;
+    }
+
+    &__img-wrap {
+        position: relative;
+        aspect-ratio: 4/3;
+        background: $stone;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__badge {
+        position: absolute;
+        top: 6px; left: 6px;
+        background: $gold;
+        color: $white;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+    }
+
+    &__actions {
+        display: flex;
+        border-top: 1px solid $stone;
+    }
+}
+
+.btn-media {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: $font-sans;
+    transition: background-color $transition, color $transition;
+    width: 100%;
+
+    &--cover {
+        color: $grey;
+        border-right: 1px solid $stone;
+
+        &:hover {
+            background: $white;
+            color: $gold;
+        }
+    }
+
+    &--is-cover {
+        color: $gold;
+        border-right: 1px solid $stone;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+    }
+
+    &--delete {
+        color: $grey;
+
+        &:hover {
+            background: $stone; color: $danger;
+        }
+    }
+
+    &--disabled {
+        color: $stone;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+@import "./responsive.scss";

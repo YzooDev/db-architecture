@@ -4,14 +4,7 @@
 include __DIR__ . '/component/header.php';
 ?>
 <div class="admin-shell">
-    <aside class="admin-sidebar">
-        <div class="admin-sidebar__brand">Daniel Bezes <span>Administration</span></div>
-        <nav class="admin-sidebar__nav">
-            <a href="/admin/project" class="active">Projets</a>
-            <a href="/" target="_blank">Voir le site</a>
-            <a href="/logout">Déconnexion</a>
-        </nav>
-    </aside>
+    <?php include __DIR__ . '/component/admin_sidebar.php'; ?>
     <main class="admin-main">
         <div class="admin-page-header">
             <h1>Projets</h1>
@@ -44,25 +37,23 @@ include __DIR__ . '/component/header.php';
                         $nbImgs = count($project->getImages());
                     ?>
                     <tr>
-                        <td>
+                        <td data-label="Aperçu">
                             <?php if ($cover) : ?>
                                 <img src="<?= htmlspecialchars($cover->getWebPath()) ?>" alt="" class="admin-table__thumb">
                             <?php else : ?>
                                 <span class="admin-table__thumb-placeholder"></span>
                             <?php endif; ?>
                         </td>
-                        <td><?= htmlspecialchars($project->getName()) ?></td>
-                        <td><span class="badge"><?= htmlspecialchars($project->getCategory()) ?></span></td>
-                        <td><?= htmlspecialchars($project->getLocation()) ?></td>
-                        <td><?= $project->getYear() ?></td>
-                        <td><?= $nbImgs ?></td>
-                        <td>
+                        <td data-label="Nom"><?= htmlspecialchars($project->getName()) ?></td>
+                        <td data-label="Catégorie"><span class="badge"><?= htmlspecialchars($project->getCategory()) ?></span></td>
+                        <td data-label="Localisation"><?= htmlspecialchars($project->getLocation()) ?></td>
+                        <td data-label="Année"><?= $project->getYear() ?></td>
+                        <td data-label="Images"><?= $nbImgs ?></td>
+                        <td data-label="Actions">
                             <div class="admin-table__actions">
-                                <a href="/admin/project/<?= $project->getId() ?>" class="btn-link">Voir</a>
                                 <a href="/admin/project/<?= $project->getId() ?>/edit" class="btn btn--primary btn--sm">Modifier</a>
-                                <form action="/admin/project/<?= $project->getId() ?>/delete" method="post"
-                                      onsubmit="return confirm('Supprimer le projet « <?= addslashes($project->getName()) ?> » ? Cette action est irréversible.')">
-                                    <button type="submit" class="btn btn--danger btn--sm">Supprimer</button>
+                                <form action="/admin/project/<?= $project->getId() ?>/delete" method="post" onsubmit="return confirm('Supprimer le projet « <?= $project->getName() ?> » ? Cette action est irréversible.')">
+                                    <button type="submit" name="submit_delete" class="btn btn--danger btn--sm">Supprimer</button>
                                 </form>
                             </div>
                         </td>

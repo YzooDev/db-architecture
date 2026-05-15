@@ -4,7 +4,7 @@ include __DIR__ . '/component/header.php';
 ?>
 <main>
     <section class="hero">
-        <p class="hero__eyebrow">Architecture &amp; Conception</p>
+        <p class="hero__eyebrow">Architecture & Conception</p>
         <h1 class="hero__title">Concevoir des espaces<br><em>qui durent</em></h1>
         <p class="hero__desc">Cabinet d'architecture basé dans le Tarn (Peyrole), spécialisé dans les projets résidentiels, commerciaux et institutionnels.</p>
         <a href="/project" class="hero__cta">Découvrir les projets →</a>
@@ -19,10 +19,15 @@ include __DIR__ . '/component/header.php';
                     en alliant esthétique, fonctionnalité et respect des contraintes techniques.
                     Spécialisé dans les projets résidentiels, commerciaux et institutionnels,
                     je mets ma rigueur et ma créativité au service de vos ambitions.
+                    
                 </p>
                 <h3 class="presentation__subtitle">Mon objectif</h3>
                 <p class="presentation__desc">
                     Concevoir des espaces uniques, adaptés à vos attentes et à votre mode de vie.
+                </p>
+                <h3 class="presentation__subtitle">Ma zone d'activité</h3>
+                <p class="presentation__desc">
+                    J'exerce principalement en région toulousaine et dans le grand Sud-Ouest, bien que mon activité puisse s'étendre à l'ensemble du territoire national selon les projets.
                 </p>
                 <a href="/contact" class="hero__cta">Prendre contact →</a>
             </div>

@@ -6,6 +6,7 @@ use App\Utils\Tools;
 use App\Service\Exception\UploadException;
 use App\Entity\Image;
 use App\Repository\ImageRepository;
+use App\Repository\ProjectRepository;
 
 class UploadService
 {
@@ -13,6 +14,7 @@ class UploadService
     private readonly int $uploadSizeMax;
     private array $uploadFormats;
     private ImageRepository $imageRepository;
+    private ProjectRepository $projectRepository;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class UploadService
         $this->uploadSizeMax = (int) $_ENV["UPLOAD_SIZE_MAX"];
         $this->uploadFormats = json_decode($_ENV["UPLOAD_FORMAT_WHITE_LIST"], true) ?? [];
         $this->imageRepository = new ImageRepository();
+        $this->projectRepository = new ProjectRepository();
     }
 
     public function storeImages(array $rawFiles, int $projectId, int $existCount = 0): array
@@ -66,6 +69,12 @@ class UploadService
         $image = $this->imageRepository->findImageById($imageId);
 
         if ($image === null) {
+            return;
+        }
+
+        $project = $this->projectRepository->findProjectById($projectId);
+
+        if (count($project->getImages()) <= 1) {
             return;
         }
 
@@ -134,11 +143,6 @@ class UploadService
         }
     }
 
-    /**
-     * Génère un nom de fichier unique et non devinable.
-     * uniqid() seul peut produire des collisions en boucle rapide —
-     * random_bytes(8) garantit l'unicité même pour de nombreux fichiers simultanés.
-     */
     private function buildFilename(string $ext): string
     {
         return uniqid("img_") . "_" . bin2hex(random_bytes(8)) . "." . $ext;

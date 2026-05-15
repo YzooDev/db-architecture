@@ -1,0 +1,100 @@
+@import "./variables.scss";
+
+// Admin
+.admin-shell {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    background: $text-color;
+    color: $white;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+
+    &__brand {
+        font-family: $font-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        border-bottom: 1px solid $anthracite;
+        padding-bottom: 24px;
+
+        span {
+            display: block;
+            font-family: $font-sans;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: $stone;
+            margin-top: 4px;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        a {
+            display: block;
+            color: $stone;
+            padding: 9px 14px;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color $transition, background-color $transition;
+
+            &:hover, &.active {
+                color: $white;
+                background: $anthracite;
+            }
+        }
+    }
+}
+
+.admin-main {
+    padding: 56px clamp(32px, 5vw, 72px);
+    max-width: 1000px;
+}
+
+.admin-page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $stone;
+
+    h1 {
+        font-family: $font-serif;
+        font-size: 2rem;
+        font-weight: 400;
+        font-style: italic;
+    }
+}
+
+// Alertes
+.alert {
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+
+    &--success {
+        background: #f0f7f0;
+        border-left: 3px solid #5a9a6a;
+        color: $success;
+    }
+
+    &--error {
+        background: #fdf0f0;
+        border-left: 3px solid $danger;
+        color: $danger;
+    }
+}

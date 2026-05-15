@@ -1,0 +1,103 @@
+@import "./variables.scss";
+@import "./components.scss";
+
+.project-hero {
+    &__cover, &__placeholder {
+        width: 100%;
+        height: clamp(300px, 55vh, 620px);
+        object-fit: cover;
+        background: $stone;
+        display: block;
+    }
+
+    &__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: $grey;
+    }
+}
+
+.project-detail {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 72px;
+    align-items: start;
+    padding: 72px 0;
+
+    &__name {
+        font-family: $font-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        margin-bottom: 24px;
+    }
+
+    &__desc {
+        line-height: 1.9;
+        color: $anthracite;
+    }
+}
+
+.project-meta {
+    background: $white;
+    padding: 32px;
+    border-top: 2px solid $text-color;
+
+    &__item {
+        padding: 14px 0;
+        border-bottom: 1px solid $stone;
+        &:last-child { 
+            border-bottom: none; 
+        }
+    }
+
+    &__label {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: $grey;
+        margin-bottom: 4px;
+    }
+
+    &__value { 
+        font-size: 0.9rem; 
+    }
+}
+
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 4px;
+    padding-bottom: 80px;
+
+    &__img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        background: $stone;
+        transition: opacity $transition;
+        &:hover { 
+            opacity: 0.85;
+        }
+    }
+}
+
+.back-link {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-bottom: 1px solid $text-color;
+    padding-bottom: 3px;
+    transition: color $transition, border-color $transition;
+    align-self: flex-start;
+    margin-top: 40px;
+
+    &:hover { 
+        color: $gold; border-color: $gold; 
+    }
+}
+
+@import "./responsive.scss";
