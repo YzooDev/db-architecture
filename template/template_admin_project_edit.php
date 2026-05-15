@@ -5,14 +5,7 @@
 include __DIR__ . '/component/header.php';
 ?>
 <div class="admin-shell">
-    <aside class="admin-sidebar">
-        <div class="admin-sidebar__brand">Daniel Bezes <span>Administration</span></div>
-        <nav class="admin-sidebar__nav">
-            <a href="/admin/project" class="active">Projets</a>
-            <a href="/" target="_blank">Voir le site</a>
-            <a href="/logout">Déconnexion</a>
-        </nav>
-    </aside>
+    <?php include __DIR__ . '/component/admin_sidebar.php'; ?>
     <main class="admin-main">
         <div class="admin-page-header">
             <h1>Modifier le projet</h1>
