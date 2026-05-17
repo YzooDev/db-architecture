@@ -18,7 +18,7 @@
         </div>
     </div>
 </footer>
-<?php if ($templateScript !== null) : ?>
+<?php if (isset($templateScript) && $templateScript !== null) : ?>
     <script src="/assets/script/<?= htmlspecialchars($template ?? '') ?>.js"></script>
 <?php endif; ?>
 </body>

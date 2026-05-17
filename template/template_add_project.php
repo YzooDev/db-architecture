@@ -43,7 +43,7 @@
                 <div class="field">
                     <label for="category">Catégorie</label>
                     <select id="category" name="category" required>
-                        <option value="" disabled selected>— Sélectionner —</option>
+                        <option value="" disabled selected>Sélectionnez une catégorie</option>
                         <?php foreach (['Collectif', 'Individuel', 'Autre'] as $cat) : ?>
                             <option value="<?= $cat ?>" <?= (($_POST['category'] ?? '') === $cat) ? 'selected' : '' ?>>
                                 <?= $cat ?>
